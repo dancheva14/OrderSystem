@@ -1,0 +1,12 @@
+C:\Users\vivian.dancheva\source\repos\Pesho\Pesho.Database\bin\Debug\netcoreapp3.1\Pesho.Database.deps.json
+C:\Users\vivian.dancheva\source\repos\Pesho\Pesho.Database\bin\Debug\netcoreapp3.1\Pesho.Database.runtimeconfig.json
+C:\Users\vivian.dancheva\source\repos\Pesho\Pesho.Database\bin\Debug\netcoreapp3.1\Pesho.Database.runtimeconfig.dev.json
+C:\Users\vivian.dancheva\source\repos\Pesho\Pesho.Database\bin\Debug\netcoreapp3.1\Pesho.Database.dll
+C:\Users\vivian.dancheva\source\repos\Pesho\Pesho.Database\bin\Debug\netcoreapp3.1\Pesho.Database.pdb
+C:\Users\vivian.dancheva\source\repos\Pesho\Pesho.Database\obj\Debug\netcoreapp3.1\Pesho.Database.AssemblyInfoInputs.cache
+C:\Users\vivian.dancheva\source\repos\Pesho\Pesho.Database\obj\Debug\netcoreapp3.1\Pesho.Database.AssemblyInfo.cs
+C:\Users\vivian.dancheva\source\repos\Pesho\Pesho.Database\obj\Debug\netcoreapp3.1\Pesho.Database.csproj.CoreCompileInputs.cache
+C:\Users\vivian.dancheva\source\repos\Pesho\Pesho.Database\obj\Debug\netcoreapp3.1\Pesho.Database.dll
+C:\Users\vivian.dancheva\source\repos\Pesho\Pesho.Database\obj\Debug\netcoreapp3.1\Pesho.Database.pdb
+C:\Users\vivian.dancheva\source\repos\Pesho\Pesho.Database\obj\Debug\netcoreapp3.1\Pesho.Database.genruntimeconfig.cache
+C:\Users\vivian.dancheva\source\repos\Pesho\Pesho.Database\obj\Debug\netcoreapp3.1\Pesho.Database.csprojAssemblyReference.cache

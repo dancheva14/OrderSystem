@@ -12,9 +12,9 @@ namespace OrderSystem.Services.Services
     public class BrandsDatabaseService : IBrandsDatabaseService
     {
         OrderSystemDbContext dbContext;
-        public BrandsDatabaseService(OrderSystemDbContext dbcon)
+        public BrandsDatabaseService()
         {
-            dbContext = dbcon;
+            dbContext = new OrderSystemDbContext();
         }
         public List<Brand> GetBrands()
         {

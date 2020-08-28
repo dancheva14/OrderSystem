@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
@@ -12,8 +13,10 @@ namespace OrderSystem.Database.Models
         public int PartId { get; set; }
         public Part Part { get; set; }
 
+        [Display(Name = "Количество")]
         public int Quantity { get; set; }
 
+        [Display(Name = "Цена")]
         public decimal Price { get; set; }
 
         public int OrderId { get; set; }

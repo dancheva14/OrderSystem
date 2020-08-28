@@ -31,13 +31,15 @@
                             {*@
                                 <a class="dropdown-toggle nav-link text-dark" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Добави<span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="AddCategory">Категория</a>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="AddPart">Част</a>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="AddBrand">Марка</a>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="AddBrandDetail">Модел</a>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="AddPartner">Партньор</a>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="AddStatus">Статус на поръчката</a>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="AddAdmin">Администратор</a>
+                                    <li>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="AddCategory">Категория</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="AddPart">Част</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="AddBrand">Марка</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="AddBrandDetail">Модел</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="AddPartner">Партньор</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="AddStatus">Статус на поръчката</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="AddAdmin">Администратор</a>
+                                    </li>
                                 </ul>
                            @* }*@
 
@@ -46,13 +48,15 @@
                             {*@
                                 <a class="dropdown-toggle nav-link text-dark" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Редактирай<span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="EditCategory">Категория</a>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="EditPart">Част</a>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="EditBrand">Марка</a>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="EditBrandDetail">Модел</a>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="EditPartner">Партньор</a>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="EditStatus">Статус на поръчката</a>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="EditUser">Потребител</a>
+                                    <li>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="EditCategory">Категория</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="EditPart">Част</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="EditBrand">Марка</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="EditBrandDetail">Модел</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="EditPartner">Партньор</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="EditStatus">Статус на поръчката</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="EditUser">Потребител</a>
+                                    </li>
                                 </ul>
 
                             <li>@Html.ActionLink("Потребители", "EditUserRoles", "User")</li>

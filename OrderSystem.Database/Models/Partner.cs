@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace OrderSystem.Database.Models
@@ -8,8 +9,10 @@ namespace OrderSystem.Database.Models
     {
         public int PartnerId { get; set; }
 
+        [Display(Name = "Наименование")]
         public string Name { get; set; }
 
+        [Display(Name = "Булстат")]
         public string Bulstat { get; set; }
 
         public List<Order> Orders { get; set; }

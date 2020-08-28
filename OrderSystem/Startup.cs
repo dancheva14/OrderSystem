@@ -97,8 +97,11 @@ namespace OrderSystem
         private void RegisterServices(IServiceCollection services)
         {
             services.AddScoped<IBrandsDatabaseService, BrandsDatabaseService>();
-
-
+            services.AddScoped<ICategoryDatabaseService, CategoryDatabaseService>();
+            services.AddScoped<IPartnersDatabaseService, PartnersDatabaseService>();
+            services.AddScoped<IStatusDatabaseService, StatusDatabaseService>();
+            services.AddScoped<IPartsDatabaseService, PartsDatabaseService>();
+            services.AddScoped<IOrdersDatabaseService, OrdersDatabaseService>();
         }
     }
 }

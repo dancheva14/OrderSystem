@@ -161,7 +161,7 @@ namespace OrderSystem.Database.Migrations
 
                     b.HasIndex("BrandId");
 
-                    b.ToTable("BrandDetail");
+                    b.ToTable("BrandDetails");
                 });
 
             modelBuilder.Entity("OrderSystem.Database.Models.Category", b =>
@@ -176,7 +176,7 @@ namespace OrderSystem.Database.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("OrderSystem.Database.Models.Order", b =>
@@ -212,7 +212,7 @@ namespace OrderSystem.Database.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Order");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("OrderSystem.Database.Models.OrderDetail", b =>
@@ -240,7 +240,7 @@ namespace OrderSystem.Database.Migrations
 
                     b.HasIndex("PartId");
 
-                    b.ToTable("OrderDetail");
+                    b.ToTable("OrderDetails");
                 });
 
             modelBuilder.Entity("OrderSystem.Database.Models.Part", b =>
@@ -268,7 +268,7 @@ namespace OrderSystem.Database.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Part");
+                    b.ToTable("Parts");
                 });
 
             modelBuilder.Entity("OrderSystem.Database.Models.Partner", b =>
@@ -286,7 +286,7 @@ namespace OrderSystem.Database.Migrations
 
                     b.HasKey("PartnerId");
 
-                    b.ToTable("Partner");
+                    b.ToTable("Partners");
                 });
 
             modelBuilder.Entity("OrderSystem.Database.Models.Role", b =>
@@ -329,7 +329,7 @@ namespace OrderSystem.Database.Migrations
 
                     b.HasKey("StatusId");
 
-                    b.ToTable("Status");
+                    b.ToTable("Statuses");
                 });
 
             modelBuilder.Entity("OrderSystem.Database.Models.User", b =>

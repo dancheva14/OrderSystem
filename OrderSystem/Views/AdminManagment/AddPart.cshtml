@@ -1,0 +1,97 @@
+﻿@model OrderSystem.Database.Models.Part
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Добави част</legend>
+        <div style="top: 50%; width: 100%">
+            @Html.HiddenFor(m => m.PartId)
+            <div style="width: 500px;">
+                            
+
+                <div>
+                    @Html.Label("Марка: ")
+                    @Html.DropDownListFor(m => m.BrandDetail.BrandId, new SelectList(new OrderSystem.Services.Services.BrandsDatabaseService().GetBrands(), "BrandId", "Name"), "Избери", htmlAttributes: new { @class = "custom-class-for-width form-control", @id = "ddlstate", @onchange = "javascript:GetCity(this.value);" })
+
+                </div>
+                <br />
+                <div>
+                    @Html.Label("Модел: ")
+                    <select id="ddlcity" name="ddlcity" class="form-control">
+                    </select>
+                </div>
+                <br />
+                <div>
+                    @Html.Label("Категория: ")
+                    @Html.DropDownListFor(m => m.CategoryId, new SelectList(new OrderSystem.Services.Services.CategoryDatabaseService().GetCategorys(), "CategoryId", "Name"), "Избери", htmlAttributes: new { @class = "custom-class-for-width form-control" })
+
+                </div>
+                <br />
+                <div class="editor-label">@Html.LabelFor(s => s.Name)</div>
+                <div class="editor-field">
+                    <input class="form-control"
+                           id="Name"
+                           name="Name"
+                           type="text"
+                           placeholder="наименование" />
+                    @Html.ValidationMessageFor(s => s.Name)
+                </div>
+                <br />
+                <div class="editor-label">@Html.LabelFor(s => s.Pricee)</div>
+                <div class="editor-field">
+                    <input class="form-control"
+                           id="Pricee"
+                           name="Pricee"
+                           type="text"
+                           placeholder="цена" />
+                    @Html.ValidationMessageFor(s => s.Pricee)
+                </div>
+                <br />
+                <div>
+                    <input class="col-12" type="submit" value=Запази />
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}
+<style>
+    fieldset {
+        margin: 20px;
+        border: 1px solid silver;
+        padding: 8px;
+        border-radius: 4px;
+        width: 550px;
+    }
+
+    legend {
+        padding: 2px;
+    }
+</style>
+
+<script language="javascript" type="text/javascript">
+    function GetCity(_stateId) {
+        var procemessage = "<option value='0'> Please wait...</option>";
+        $("#ddlcity").html(procemessage).show();
+        var url = "/AdminManagment/GetBrandDetailsByBrandId/";
+
+        $.ajax({
+            url: url,
+            data: { stateid: _stateId },
+            cache: false,
+            type: "POST",
+            success: function (data) {
+                var markup = "<option value='0'>Избери модел</option>";
+                for (var x = 0; x < data.length; x++) {
+                    markup += "<option value=" + data[x].value + ">" + data[x].text + "</option>";
+
+                    debugger;
+                }
+                $("#ddlcity").html(markup).show();
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+
+    }
+</script>

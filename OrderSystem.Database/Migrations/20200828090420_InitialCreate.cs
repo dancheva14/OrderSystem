@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OrderSystem.Database.Migrations
 {
-    public partial class InitiallCreate : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -62,7 +62,7 @@ namespace OrderSystem.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Category",
+                name: "Categories",
                 columns: table => new
                 {
                     CategoryId = table.Column<int>(nullable: false)
@@ -71,11 +71,11 @@ namespace OrderSystem.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.CategoryId);
+                    table.PrimaryKey("PK_Categories", x => x.CategoryId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Partner",
+                name: "Partners",
                 columns: table => new
                 {
                     PartnerId = table.Column<int>(nullable: false)
@@ -85,11 +85,11 @@ namespace OrderSystem.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Partner", x => x.PartnerId);
+                    table.PrimaryKey("PK_Partners", x => x.PartnerId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Status",
+                name: "Statuses",
                 columns: table => new
                 {
                     StatusId = table.Column<int>(nullable: false)
@@ -98,7 +98,7 @@ namespace OrderSystem.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Status", x => x.StatusId);
+                    table.PrimaryKey("PK_Statuses", x => x.StatusId);
                 });
 
             migrationBuilder.CreateTable(
@@ -208,7 +208,7 @@ namespace OrderSystem.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BrandDetail",
+                name: "BrandDetails",
                 columns: table => new
                 {
                     BrandDetailId = table.Column<int>(nullable: false)
@@ -220,9 +220,9 @@ namespace OrderSystem.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BrandDetail", x => x.BrandDetailId);
+                    table.PrimaryKey("PK_BrandDetails", x => x.BrandDetailId);
                     table.ForeignKey(
-                        name: "FK_BrandDetail_Brands_BrandId",
+                        name: "FK_BrandDetails_Brands_BrandId",
                         column: x => x.BrandId,
                         principalTable: "Brands",
                         principalColumn: "BrandId",
@@ -230,7 +230,7 @@ namespace OrderSystem.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order",
+                name: "Orders",
                 columns: table => new
                 {
                     OrderId = table.Column<int>(nullable: false)
@@ -244,26 +244,26 @@ namespace OrderSystem.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order", x => x.OrderId);
+                    table.PrimaryKey("PK_Orders", x => x.OrderId);
                     table.ForeignKey(
-                        name: "FK_Order_Partner_PartnerId",
+                        name: "FK_Orders_Partners_PartnerId",
                         column: x => x.PartnerId,
-                        principalTable: "Partner",
+                        principalTable: "Partners",
                         principalColumn: "PartnerId");
                     table.ForeignKey(
-                        name: "FK_Order_Status_StatusId",
+                        name: "FK_Orders_Statuses_StatusId",
                         column: x => x.StatusId,
-                        principalTable: "Status",
+                        principalTable: "Statuses",
                         principalColumn: "StatusId");
                     table.ForeignKey(
-                        name: "FK_Order_AspNetUsers_UserId",
+                        name: "FK_Orders_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Part",
+                name: "Parts",
                 columns: table => new
                 {
                     PartId = table.Column<int>(nullable: false)
@@ -275,23 +275,23 @@ namespace OrderSystem.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Part", x => x.PartId);
+                    table.PrimaryKey("PK_Parts", x => x.PartId);
                     table.ForeignKey(
-                        name: "FK_Part_BrandDetail_BrandDetailId",
+                        name: "FK_Parts_BrandDetails_BrandDetailId",
                         column: x => x.BrandDetailId,
-                        principalTable: "BrandDetail",
+                        principalTable: "BrandDetails",
                         principalColumn: "BrandDetailId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Part_Category_CategoryId",
+                        name: "FK_Parts_Categories_CategoryId",
                         column: x => x.CategoryId,
-                        principalTable: "Category",
+                        principalTable: "Categories",
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderDetail",
+                name: "OrderDetails",
                 columns: table => new
                 {
                     OrderDetailId = table.Column<int>(nullable: false)
@@ -303,17 +303,17 @@ namespace OrderSystem.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderDetail", x => x.OrderDetailId);
+                    table.PrimaryKey("PK_OrderDetails", x => x.OrderDetailId);
                     table.ForeignKey(
-                        name: "FK_OrderDetail_Order_OrderId",
+                        name: "FK_OrderDetails_Orders_OrderId",
                         column: x => x.OrderId,
-                        principalTable: "Order",
+                        principalTable: "Orders",
                         principalColumn: "OrderId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrderDetail_Part_PartId",
+                        name: "FK_OrderDetails_Parts_PartId",
                         column: x => x.PartId,
-                        principalTable: "Part",
+                        principalTable: "Parts",
                         principalColumn: "PartId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -358,43 +358,43 @@ namespace OrderSystem.Database.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BrandDetail_BrandId",
-                table: "BrandDetail",
+                name: "IX_BrandDetails_BrandId",
+                table: "BrandDetails",
                 column: "BrandId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_PartnerId",
-                table: "Order",
-                column: "PartnerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Order_StatusId",
-                table: "Order",
-                column: "StatusId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Order_UserId",
-                table: "Order",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderDetail_OrderId",
-                table: "OrderDetail",
+                name: "IX_OrderDetails_OrderId",
+                table: "OrderDetails",
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderDetail_PartId",
-                table: "OrderDetail",
+                name: "IX_OrderDetails_PartId",
+                table: "OrderDetails",
                 column: "PartId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Part_BrandDetailId",
-                table: "Part",
+                name: "IX_Orders_PartnerId",
+                table: "Orders",
+                column: "PartnerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_StatusId",
+                table: "Orders",
+                column: "StatusId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_UserId",
+                table: "Orders",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Parts_BrandDetailId",
+                table: "Parts",
                 column: "BrandDetailId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Part_CategoryId",
-                table: "Part",
+                name: "IX_Parts_CategoryId",
+                table: "Parts",
                 column: "CategoryId");
         }
 
@@ -416,31 +416,31 @@ namespace OrderSystem.Database.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "OrderDetail");
+                name: "OrderDetails");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Order");
+                name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Part");
+                name: "Parts");
 
             migrationBuilder.DropTable(
-                name: "Partner");
+                name: "Partners");
 
             migrationBuilder.DropTable(
-                name: "Status");
+                name: "Statuses");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "BrandDetail");
+                name: "BrandDetails");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Brands");

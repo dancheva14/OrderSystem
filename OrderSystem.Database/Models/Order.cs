@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace OrderSystem.Database.Models
@@ -8,10 +9,13 @@ namespace OrderSystem.Database.Models
     {
         public int OrderId { get; set; }
 
+        [Display(Name = "Дата")]
         public DateTime Date { get; set; }
 
+        [Display(Name = "Стойност")]
         public decimal Amount { get; set; }
 
+        [Display(Name = "Адрес")]
         public string Address { get; set; }
 
         public int StatusId { get; set; }

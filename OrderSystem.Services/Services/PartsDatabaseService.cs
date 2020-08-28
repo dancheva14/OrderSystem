@@ -40,7 +40,12 @@ namespace OrderSystem.Services.Services
         public void UpdatePart(Part part)
         {
             var dbContextPart = dbContext.Parts.FirstOrDefault(b => b.PartId == part.PartId);
-            dbContextPart = part;
+            dbContextPart.BrandDetail = part.BrandDetail;
+            dbContextPart.BrandDetailId = part.BrandDetailId;
+            dbContextPart.Category = part.Category;
+            dbContextPart.CategoryId = part.CategoryId;
+            dbContextPart.Name = part.Name;
+            dbContextPart.Pricee = part.Pricee;
 
             dbContext.SaveChanges();
         }

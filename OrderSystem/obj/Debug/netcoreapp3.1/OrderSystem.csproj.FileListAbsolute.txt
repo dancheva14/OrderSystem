@@ -509,3 +509,9 @@ C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\bin\Debug\netcorea
 C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\bin\Debug\netcoreapp3.1\System.Web.WebPages.Razor.dll
 C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\bin\Debug\netcoreapp3.1\System.Web.WebPages.dll
 C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\bin\Debug\netcoreapp3.1\Microsoft.Web.Infrastructure.dll
+C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\obj\Debug\netcoreapp3.1\Razor\Views\AdminEditManagment\GetListBrands.cshtml.g.cs
+C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\obj\Debug\netcoreapp3.1\Razor\Views\AdminEditManagment\GetListBrandDetail.cshtml.g.cs
+C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\obj\Debug\netcoreapp3.1\Razor\Views\AdminEditManagment\GetListCategory.cshtml.g.cs
+C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\obj\Debug\netcoreapp3.1\Razor\Views\AdminEditManagment\GetListPart.cshtml.g.cs
+C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\obj\Debug\netcoreapp3.1\Razor\Views\AdminEditManagment\GetListPartner.cshtml.g.cs
+C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\obj\Debug\netcoreapp3.1\Razor\Views\AdminEditManagment\GetListStatus.cshtml.g.cs

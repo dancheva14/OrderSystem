@@ -1,4 +1,5 @@
-﻿using OrderSystem.Database;
+﻿using Microsoft.EntityFrameworkCore;
+using OrderSystem.Database;
 using OrderSystem.Database.Models;
 using OrderSystem.Services.Interfaces;
 using System;
@@ -41,7 +42,8 @@ namespace OrderSystem.Services.Services
         public void UpdatePartner(Partner partner)
         {
             var dbContextPartner = dbContext.Partners.FirstOrDefault(b => b.PartnerId == partner.PartnerId);
-            dbContextPartner = partner;
+            dbContextPartner.Name = partner.Name;
+            dbContextPartner.Bulstat = partner.Bulstat;
 
             dbContext.SaveChanges();
         }

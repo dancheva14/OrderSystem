@@ -41,7 +41,11 @@ namespace OrderSystem.Services.Services
         public void UpdateOrder(Order order)
         {
             var dbContextOrder = dbContext.Orders.FirstOrDefault(b => b.OrderId == order.OrderId);
-            dbContextOrder = order;
+            dbContextOrder.Address = order.Address;
+            dbContextOrder.Amount = order.Amount;
+            dbContextOrder.Date = order.Date;
+            dbContextOrder.Partner = order.Partner;
+            dbContextOrder.Status = order.Status;
 
             dbContext.SaveChanges();
         }
@@ -71,7 +75,9 @@ namespace OrderSystem.Services.Services
         public void UpdateOrderDetail(OrderDetail orderDetail)
         {
             var dbContextOrderDetail = dbContext.OrderDetails.FirstOrDefault(b => b.OrderDetailId == orderDetail.OrderDetailId);
-            dbContextOrderDetail = orderDetail;
+            dbContextOrderDetail.Part = orderDetail.Part;
+            dbContextOrderDetail.Price = orderDetail.Price;
+            dbContextOrderDetail.Quantity = orderDetail.Quantity;
 
             dbContext.SaveChanges();
         }

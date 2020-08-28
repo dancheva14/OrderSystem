@@ -13,6 +13,8 @@ namespace OrderSystem.Services.Interfaces
 
         List<BrandDetail> GetBrandDetails(int brandId);
 
+        List<BrandDetail> GetAllBrandDetails();
+
         BrandDetail GetBrandDetail(int brandDetailId);
 
         void AddBrand(Brand brand);

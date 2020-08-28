@@ -35,6 +35,10 @@ namespace OrderSystem.Services.Services
             return dbContext.BrandDetails.FirstOrDefault(b => b.BrandDetailId == brandDetailId);
         }
 
+        public List<BrandDetail> GetAllBrandDetails()
+        {
+            return dbContext.BrandDetails.ToList();
+        }
 
         public void AddBrand(Brand brand)
         {
@@ -63,7 +67,7 @@ namespace OrderSystem.Services.Services
         public void UpdateBrand(Brand brand)
         {
             var dbContextBrand = dbContext.Brands.FirstOrDefault(b => b.BrandId == brand.BrandId);
-            dbContextBrand = brand;
+            dbContextBrand.Name = brand.Name;
 
             dbContext.SaveChanges();
         }
@@ -71,7 +75,10 @@ namespace OrderSystem.Services.Services
         public void UpdateBrandDetail(BrandDetail branddetail)
         {
             var dbContextbranddetail = dbContext.BrandDetails.FirstOrDefault(b => b.BrandDetailId == branddetail.BrandDetailId);
-            dbContextbranddetail = branddetail;
+            dbContextbranddetail.BrandId = branddetail.BrandId;
+            dbContextbranddetail.EngineType = branddetail.EngineType;
+            dbContextbranddetail.Power = branddetail.Power;
+            dbContextbranddetail.Year = branddetail.Year;
 
             dbContext.SaveChanges();
         }

@@ -1,5 +1,38 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model OrderSystem.Database.Models.Status
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Редактирай статус</legend>
+        <div style="top: 50%; width: 100%">
+            @Html.HiddenFor(m => m.StatusId)
+            <div style="top:50%; width: 500px;">
+                <div class="editor-label">@Html.LabelFor(s => s.Name)</div>
+                <div class="editor-field">
+
+                    @Html.TextBoxFor(m => m.Name, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(s => s.Name)
+                </div>
+                <br />
+
+                <br />
+                <div>
+                    <input class="col-12" type="submit" value=Запази />
+                </div>
+            </div>
+        </div>
+    </fieldset>
 }
+<style>
+    fieldset {
+        margin: 20px;
+        border: 1px solid silver;
+        padding: 8px;
+        border-radius: 4px;
+        width: 550px;
+    }
+
+    legend {
+        padding: 2px;
+    }
+</style>

@@ -41,7 +41,7 @@ namespace OrderSystem.Services.Services
         public void UpdateCategory(Category category)
         {
             var dbContextCategory = dbContext.Categories.FirstOrDefault(b => b.CategoryId == category.CategoryId);
-            dbContextCategory = category;
+            dbContextCategory.Name = category.Name;
 
             dbContext.SaveChanges();
         }

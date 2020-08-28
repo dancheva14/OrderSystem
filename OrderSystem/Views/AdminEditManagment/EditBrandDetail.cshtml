@@ -1,5 +1,54 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model OrderSystem.Database.Models.BrandDetail
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Редактирай модел</legend>
+        <div style="top: 50%; width: 100%">
+            @Html.HiddenFor(m => m.BrandDetailId)
+            <div style="width: 500px;">
+                <div>
+                    @Html.Label("Марка: ")
+                    @Html.DropDownListFor(m => m.BrandId, new SelectList(new OrderSystem.Services.Services.BrandsDatabaseService().GetBrands(), "BrandId", "Name"), "Избери", htmlAttributes: new { @class = "custom-class-for-width form-control" })
+
+                </div>
+                <br />
+                <div class="editor-label">@Html.LabelFor(s => s.EngineType)</div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(m => m.EngineType, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(s => s.EngineType)
+                </div>
+                <br />
+                <div class="editor-label">@Html.LabelFor(s => s.Power)</div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(m => m.Power, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(s => s.Power)
+                </div>
+                <br />
+                <div class="editor-label">@Html.LabelFor(s => s.Year)</div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(m => m.Year, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(s => s.Year)
+                </div>
+                <br />
+                <br />
+                <div>
+                    <input class="col-12" type="submit" value=Запази />
+                </div>
+            </div>
+        </div>
+    </fieldset>
 }
+<style>
+    fieldset {
+        margin: 20px;
+        border: 1px solid silver;
+        padding: 8px;
+        border-radius: 4px;
+        width: 550px;
+    }
+
+    legend {
+        padding: 2px;
+    }
+</style>

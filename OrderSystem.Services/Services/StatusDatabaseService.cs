@@ -41,7 +41,7 @@ namespace OrderSystem.Services.Services
         public void UpdateStatus(Status status)
         {
             var dbContextStatus = dbContext.Statuses.FirstOrDefault(b => b.StatusId == status.StatusId);
-            dbContextStatus = status;
+            dbContextStatus.Name = status.Name;
 
             dbContext.SaveChanges();
         }

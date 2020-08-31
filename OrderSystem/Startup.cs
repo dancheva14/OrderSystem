@@ -10,6 +10,7 @@ using OrderSystem.Services.Services;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace OrderSystem
 {
@@ -41,6 +42,13 @@ namespace OrderSystem
             })
                 .AddEntityFrameworkStores<OrderSystemDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
             services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme,
               options =>
@@ -81,6 +89,7 @@ namespace OrderSystem
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthorization();
 
@@ -102,6 +111,8 @@ namespace OrderSystem
             services.AddScoped<IStatusDatabaseService, StatusDatabaseService>();
             services.AddScoped<IPartsDatabaseService, PartsDatabaseService>();
             services.AddScoped<IOrdersDatabaseService, OrdersDatabaseService>();
+
+            services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
         }
     }
 }

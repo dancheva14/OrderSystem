@@ -63,6 +63,22 @@ namespace OrderSystem.Database
                 .HasPrincipalKey(i => i.StatusId)
                 .HasForeignKey(d => d.StatusId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder
+                .Entity<Part>()
+                .HasOne(p => p.Category)
+                .WithMany(a => a.Parts)
+                .HasPrincipalKey(a => a.CategoryId)
+                .HasForeignKey(b => b.CategoryId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder
+                .Entity<Part>()
+                .HasOne(p => p.BrandDetail)
+                .WithMany(a => a.Parts)
+                .HasPrincipalKey(a => a.BrandDetailId)
+                .HasForeignKey(b => b.BrandDetailId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)

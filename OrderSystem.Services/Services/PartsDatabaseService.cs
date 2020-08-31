@@ -1,4 +1,5 @@
-﻿using OrderSystem.Database;
+﻿using Microsoft.EntityFrameworkCore;
+using OrderSystem.Database;
 using OrderSystem.Database.Models;
 using OrderSystem.Services.Interfaces;
 using System;
@@ -17,7 +18,7 @@ namespace OrderSystem.Services.Services
         }
         public List<Part> GetParts()
         {
-            return dbContext.Parts.ToList();
+            return dbContext.Parts.Include(a => a.Category).Include(p => p.BrandDetail).ThenInclude(b => b.Brand).ToList();
         }
 
         public Part GetPart(int id)

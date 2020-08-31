@@ -155,6 +155,9 @@ namespace OrderSystem.Controllers
         [HttpPost]
         public IActionResult AddPart(Part part)
         {
+           var brandDetId = Request.Form["ddlcity"].ToString();
+            part.BrandDetail = null;
+            part.BrandDetailId = int.Parse(brandDetId);
             partService.AddPart(part);
             return RedirectToAction("Index", "Home");
         }

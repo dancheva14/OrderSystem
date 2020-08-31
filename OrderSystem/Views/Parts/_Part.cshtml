@@ -1,0 +1,52 @@
+﻿@model object
+@{
+    dynamic mod = Model;
+    var item = mod.GetType().GetProperty("part").GetValue(mod, null) as OrderSystem.Database.Models.Part;
+
+    //var base64 = Convert.ToBase64String(item.Image.Data);
+    //var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+}
+    <fieldset>
+        <legend style="font-size:15px">@item.Name</legend>
+        <input type="hidden" name="Item.Name" value="" />
+
+        <div>
+            @Html.Label("Цена :")
+            @Html.Label(item.Pricee.ToString())
+        </div>
+        <div>
+            @Html.Label("Категория")
+            @Html.Label(item.Category.Name)
+        </div>
+        <div>
+            @Html.Label("Марка:")
+            @Html.Label(item.BrandDetail.Brand.Name);
+        </div>
+        <div >
+           <label>Двигател: @item.BrandDetail.EngineType, к.с.: @item.BrandDetail.Power,година: @item.BrandDetail.Year</label>
+        </div>
+        <div>
+            @*  <img src="@imgSrc" style="height:140px;width:150px;" />*@
+            @using (Html.BeginForm("AddToCart", "Parts"))
+            {
+                @Html.Hidden(item.PartId.ToString())
+                <input type="hidden" name="ItemId" value="@item.PartId" />
+                <input type="submit" value="Добави в количката" />
+            }
+        </div>
+    </fieldset>
+<style>
+    fieldset {
+        font-size: 13px;
+        word-break:break-all;
+        margin: 20px;
+        border: 1px solid silver;
+        padding: 8px;
+        border-radius: 4px;
+        width: 280px;
+    }
+
+    legend {
+        padding: 2px;
+    }
+</style>

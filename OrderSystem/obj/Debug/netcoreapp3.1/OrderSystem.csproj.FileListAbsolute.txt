@@ -515,3 +515,6 @@ C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\obj\Debug\netcorea
 C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\obj\Debug\netcoreapp3.1\Razor\Views\AdminEditManagment\GetListPart.cshtml.g.cs
 C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\obj\Debug\netcoreapp3.1\Razor\Views\AdminEditManagment\GetListPartner.cshtml.g.cs
 C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\obj\Debug\netcoreapp3.1\Razor\Views\AdminEditManagment\GetListStatus.cshtml.g.cs
+C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\obj\Debug\netcoreapp3.1\Razor\Views\CreateOrder\CreateOrder.cshtml.g.cs
+C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\obj\Debug\netcoreapp3.1\Razor\Views\Parts\PartsList.cshtml.g.cs
+C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\obj\Debug\netcoreapp3.1\Razor\Views\Parts\_Part.cshtml.g.cs

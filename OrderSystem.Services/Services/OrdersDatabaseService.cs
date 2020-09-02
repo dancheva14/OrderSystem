@@ -19,7 +19,11 @@ namespace OrderSystem.Services.Services
 
         public List<Order> GetOrders()
         {
-            return dbContext.Orders.Include(p => p.Partner).Include(s => s.Status).Include(u => u.User).Include(o => o.OrderDetails).ThenInclude(a => a.Part).ToList();
+            return dbContext.Orders
+                .Include(p => p.Partner)
+                .Include(p => p.Status)
+                .Include(p => p.User)
+                .Include(p => p.OrderDetails).ThenInclude(p => p.Part).ToList();
         }
 
         public Order GetOrder(int id)

@@ -18,13 +18,13 @@ namespace OrderSystem.Controllers
             ordersService = ordersDatabaseService;
         }
 
-        public IActionResult OrdersList(Order order)
+        public IActionResult OrdersList(int orderId)
         {
             if (User.Identity.Name == null)
                 return RedirectToAction("Login", "User");
             else
             {
-                if (order == null || order.OrderDetails ==null)
+                if (orderId == 0)
                 {
                     var orders = ordersService.GetOrders().Where(o => o.User.UserName == User.Identity.Name);
                     return View(orders);
@@ -32,7 +32,7 @@ namespace OrderSystem.Controllers
                 else
                 {
                     List<Order> orders = new List<Order>();
-                    orders.Add(order);
+                    orders.Add(ordersService.GetOrder(orderId));
                     return View(orders);
                 }
             }
@@ -71,7 +71,7 @@ namespace OrderSystem.Controllers
             var order = ordersService.GetOrderByNumber(number);
 
 
-            return RedirectToAction("OrdersList", "Orders", order);
+            return RedirectToAction("OrdersList", "Orders", new { orderId = order.OrderId });
         }
     }
 }

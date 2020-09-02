@@ -9,6 +9,8 @@ namespace OrderSystem.Database.Models
     {
         public int OrderId { get; set; }
 
+        public string Number { get; set; }
+
         [Display(Name = "Дата")]
         public DateTime Date { get; set; }
 
@@ -20,15 +22,15 @@ namespace OrderSystem.Database.Models
 
         public int StatusId { get; set; }
 
-        public Status Status { get; set; }
+        public virtual Status Status { get; set; }
 
         public int PartnerId { get; set; }
 
-        public Partner Partner { get; set; }
+        public virtual Partner Partner { get; set; }
 
         public string UserId { get; set; }
 
-        public User User{ get; set; }
+        public virtual User User{ get; set; }
 
         public virtual List<OrderDetail> OrderDetails { get; set; }
     }

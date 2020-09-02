@@ -195,6 +195,9 @@ namespace OrderSystem.Database.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Number")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("PartnerId")
                         .HasColumnType("int");
 
@@ -502,15 +505,15 @@ namespace OrderSystem.Database.Migrations
             modelBuilder.Entity("OrderSystem.Database.Models.Part", b =>
                 {
                     b.HasOne("OrderSystem.Database.Models.BrandDetail", "BrandDetail")
-                        .WithMany()
+                        .WithMany("Parts")
                         .HasForeignKey("BrandDetailId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("OrderSystem.Database.Models.Category", "Category")
-                        .WithMany()
+                        .WithMany("Parts")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

@@ -29,12 +29,10 @@ namespace OrderSystem.Controllers
         [HttpGet]
         public IActionResult AddCategory()
         {
-
-            //var user = User.Identity.Name;
-            //if (user == null)
-            //    return RedirectToAction("Login", "User");
-            //else
-            return View();
+            if (User.Identity.Name == null)
+                return RedirectToAction("Login", "User");
+            else
+                return View();
         }
 
         [HttpPost]
@@ -69,12 +67,10 @@ namespace OrderSystem.Controllers
         [HttpGet]
         public IActionResult AddBrandDetail()
         {
-
-            //var user = User.Identity.Name;
-            //if (user == null)
-            //    return RedirectToAction("Login", "User");
-            //else
-            return View();
+            if (User.Identity.Name == null)
+                return RedirectToAction("Login", "User");
+            else
+                return View();
         }
 
         [HttpPost]
@@ -144,12 +140,10 @@ namespace OrderSystem.Controllers
         [HttpGet]
         public IActionResult AddPart()
         {
-
-            //var user = User.Identity.Name;
-            //if (user == null)
-            //    return RedirectToAction("Login", "User");
-            //else
-            return View();
+            if (User.Identity.Name == null)
+                return RedirectToAction("Login", "User");
+            else
+                return View();
         }
 
         [HttpPost]

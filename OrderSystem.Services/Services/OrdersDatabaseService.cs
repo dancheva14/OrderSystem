@@ -1,4 +1,5 @@
-﻿using OrderSystem.Database;
+﻿using Microsoft.EntityFrameworkCore;
+using OrderSystem.Database;
 using OrderSystem.Database.Models;
 using OrderSystem.Services.Interfaces;
 using System;
@@ -18,18 +19,21 @@ namespace OrderSystem.Services.Services
 
         public List<Order> GetOrders()
         {
-            return dbContext.Orders.ToList();
+            return dbContext.Orders.Include(p => p.Partner).Include(s => s.Status).Include(u => u.User).Include(o => o.OrderDetails).ThenInclude(a => a.Part).ToList();
         }
 
         public Order GetOrder(int id)
         {
-            return dbContext.Orders.FirstOrDefault(a => a.OrderId == id);
+            return GetOrders().FirstOrDefault(a => a.OrderId == id);
         }
 
         public void AddOrder(Order order)
         {
-            dbContext.Orders.Add(order);
-            dbContext.SaveChanges();
+            if (order != null)
+            {
+                dbContext.Orders.Add(order);
+                dbContext.SaveChanges();
+            }
         }
 
         public void DeleteOrder(Order order)
@@ -40,12 +44,12 @@ namespace OrderSystem.Services.Services
 
         public void UpdateOrder(Order order)
         {
-            var dbContextOrder = dbContext.Orders.FirstOrDefault(b => b.OrderId == order.OrderId);
+            var dbContextOrder = GetOrder(order.OrderId);
             dbContextOrder.Address = order.Address;
             dbContextOrder.Amount = order.Amount;
             dbContextOrder.Date = order.Date;
-            dbContextOrder.Partner = order.Partner;
-            dbContextOrder.Status = order.Status;
+            dbContextOrder.PartnerId = order.PartnerId;
+            dbContextOrder.StatusId = order.StatusId;
 
             dbContext.SaveChanges();
         }
@@ -80,6 +84,16 @@ namespace OrderSystem.Services.Services
             dbContextOrderDetail.Quantity = orderDetail.Quantity;
 
             dbContext.SaveChanges();
+        }
+
+        public Order GetOrderByNumber(string number)
+        {
+            var order = dbContext.Orders
+                .Include(p => p.Partner)
+                .Include(p => p.Status)
+                .Include(p => p.User)
+                .Include(p => p.OrderDetails).ThenInclude(p => p.Part).FirstOrDefault(a => a.Number == number);
+            return order;
         }
     }
 }

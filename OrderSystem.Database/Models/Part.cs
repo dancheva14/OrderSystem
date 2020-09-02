@@ -17,9 +17,9 @@ namespace OrderSystem.Database.Models
         public decimal Pricee { get; set; }
 
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
 
         public int BrandDetailId { get; set; }
-        public BrandDetail BrandDetail { get; set; }
+        public virtual BrandDetail BrandDetail { get; set; }
     }
 }

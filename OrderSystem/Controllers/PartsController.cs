@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OrderSystem.Services.Interfaces;
 using OrderSystem.ViewModels;
@@ -18,14 +19,19 @@ namespace OrderSystem.Controllers
         }
         public IActionResult PartsList()
         {
-            var parts = partsService.GetParts();
+            if (User.Identity.Name == null)
+                return RedirectToAction("Login", "User");
+            else
+            {
+                var parts = partsService.GetParts();
 
-            var partsVM = new PartsListViewModel();
-            partsVM.Parts = new List<Database.Models.Part>();
+                var partsVM = new PartsListViewModel();
+                partsVM.Parts = new List<Database.Models.Part>();
 
-            partsVM.Parts.AddRange(parts);
+                partsVM.Parts.AddRange(parts);
 
-            return View(partsVM);
+                return View(partsVM);
+            }
         }
 
         [HttpPost]
@@ -45,12 +51,15 @@ namespace OrderSystem.Controllers
         public IActionResult AddToCart(int itemId = 0)
         {
             string id = string.Empty ;
-            if (TempData["itemsToCart"] != null)
-                id = TempData["itemsToCart"].ToString();
+            if (HttpContext.Session.GetString("itemsToCart") != null)
+            {
+                id = HttpContext.Session.GetString("itemsToCart");
+                id += "," + itemId;
+            }
+            else
+                id = itemId.ToString();
 
-            id += "," + itemId;
-
-            TempData["itemsToCart"] = id;
+            HttpContext.Session.SetString("itemsToCart", id);
 
             return RedirectToAction("PartsList", "Parts");
         }

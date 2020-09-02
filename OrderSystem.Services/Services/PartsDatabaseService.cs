@@ -50,5 +50,18 @@ namespace OrderSystem.Services.Services
 
             dbContext.SaveChanges();
         }
+
+        public List<Part> GetPartsByIds(string ids)
+        {
+            List<int> idArr = new List<int>();
+            var idStr = ids.ToString().Split(",").ToList();
+
+            foreach (var item in idStr)
+            {
+                idArr.Add(Convert.ToInt32(item));
+            }
+
+            return dbContext.Parts.Where(p => idArr.Contains(p.PartId)).Include(b=>b.BrandDetail).ThenInclude(a=>a.Brand).ToList();
+        }
     }
 }

@@ -1,25 +1,91 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Security.Cryptography.Xml;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using OrderSystem.Database.Models;
+using OrderSystem.Services.Interfaces;
 
 namespace OrderSystem.Controllers
 {
     public class ShoppingCartController : Controller
     {
+        IPartsDatabaseService partsService;
+        IOrdersDatabaseService ordersService;
+        IPartnersDatabaseService partnerService;
+        IStatusDatabaseService statusService;
+
+        public ShoppingCartController(IPartsDatabaseService partsDatabaseService,IOrdersDatabaseService ordersDatabaseService, IPartnersDatabaseService partnersDatabase,IStatusDatabaseService statusDatabase)
+        {
+            partsService = partsDatabaseService;
+            ordersService = ordersDatabaseService;
+            partnerService = partnersDatabase;
+            statusService = statusDatabase;
+        }
+
         public IActionResult Cart()
         {
-            //var user = Session["User"] as User;
-            //if (user == null)
-            //    return RedirectToAction("Login", "User");
-            //else
-                // Return the view
-                return View();
+            Random random = new Random();
+            var order = new Order();
+
+            if (User.Identity.Name == null)
+                return RedirectToAction("Login", "User");
+            else
+            {
+                var ids = HttpContext.Session.GetString("itemsToCart");
+                if (!string.IsNullOrEmpty(ids))
+                {
+                    var parts = partsService.GetPartsByIds(ids.ToString());
+                    order.OrderDetails = new List<OrderDetail>();
+                    foreach (var part in parts)
+                    {
+                        order.OrderDetails.Add(new OrderDetail { Part = part, Price = part.Pricee, Quantity = 1 });
+                    }
+                    order.Number = random.Next(1000, 100000).ToString();
+                    return View(order);
+                }
+                else
+                    return RedirectToAction("Index", "Home");
+
+            }
         }
-        
+
+        [HttpPost]
+        public IActionResult Cart(Order order)
+        {
+
+            var ids = HttpContext.Session.GetString("itemsToCart");
+            if (!string.IsNullOrEmpty(ids))
+            {
+                Random random = new Random();
+                var parts = partsService.GetPartsByIds(ids.ToString());
+                order.OrderDetails = new List<OrderDetail>();
+                foreach (var part in parts)
+                {
+                    order.OrderDetails.Add(new OrderDetail { Part = part, Price = part.Pricee, Quantity = 1 });
+                }
+                order.Number = random.Next(1000, 100000).ToString();
+            }
+            order.Date = DateTime.Now;
+            order.Amount = order.OrderDetails.Sum(a => a.Price * a.Quantity);
+            order.PartnerId = partnerService.GetPartners().FirstOrDefault().PartnerId;
+            order.StatusId = statusService.GetStatuss().FirstOrDefault().StatusId;
+            order.UserId = "81781c97-7def-4973-9b78-de0897b3c37f";
+            order.Partner = null;
+            order.Status = null;
+            order.User = null;
+         
+            ordersService.AddOrder(order);
+
+            HttpContext.Session.SetString("itemsToCart", string.Empty);
+
+            return RedirectToAction("Index", "Home");
+        }
+
         [HttpPost]
         public IActionResult AddToCart(int itemId = 0)
         {
@@ -30,104 +96,52 @@ namespace OrderSystem.Controllers
             // Return the view
             return View();
         }
-        //private int isExisting(int id)
-        //{
-        //    List<Part> cart = (List<Part>)Session["cart"];
-        //    for (int i = 0; i < cart.Count; i++)
-        //        if (cart[i].PartId == id)
-        //            return i;
-        //    return -1;
-        //}
-        //public ActionResult Delete(int id)
-        //{
-        //    int index = isExisting(id);
-        //    List<Part> cart = (List<Part>)Session["cart"];
-        //    cart.RemoveAt(index);
-        //    HttpContext.Session.("cart", cart);
-        //    return View("Cart");
-        //}
-        //public ActionResult OrderNow(int id)
-        //{
-        //    if (Session["cart"] == null)
-        //    {
-        //        List<Part> cart = new List<Part>();
-        //        // cart.Add(new Item())
-        //        Session["cart"] = cart;
-        //    }
-        //    else
-        //    {
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var ids = HttpContext.Session.GetString("itemsToCart");
 
-        //        List<Part> cart = (List<Part>)Session["cart"];
-        //        int index = isExisting(id);
-        //        if (index == -1)
-        //        {
-        //            // cart.Add(new Item())
-        //        }
-        //        else
-        //            cart[index].Quantity++;
+            List<string> idArr = ids.Split(",").ToList();
 
-        //        Session["cart"] = cart;
-        //    }
-        //    return View("Cart");
-        //}
+            idArr.Remove(id.ToString());
+            string newIds = string.Empty;
+            foreach (var item in idArr)
+            {
+                if (!string.IsNullOrEmpty(newIds))
+                    newIds += item;
+                else
+                    newIds = item;
+            }
 
-        //public ActionResult Update(System.Web.Mvc.FormCollection fc)
-        //{
-        //    if (fc.Count > 0)
-        //    {
-        //        string[] quantities = fc.GetValues("quantity");
-        //        List<Part> cart = (List<Part>)Session["cart"];
-        //        for (int i = 0; i < cart.Count; i++)
-        //            cart[i].Quantity = Convert.ToInt32(quantities[i]);
-        //        Session["cart"] = cart;
-        //    }
-        //    return View("Cart");
-        //}
+            HttpContext.Session.SetString("itemsToCart", newIds);
 
-        //public ActionResult Checkout()
-        //{
-        //    return View("Ckeckout");
-        //}
+            return RedirectToAction("Cart", "ShoppingCart");
+        }
 
-        //public ActionResult saveOrder()
-        //{
-        //    DateTime date = DateTime.Now;
+        [HttpPost]
+        public IActionResult Order(Order order)
+        {
+            var ids = HttpContext.Session.GetString("itemsToCart");
+            if (!string.IsNullOrEmpty(ids))
+            {
+                Random random = new Random();
+                var parts = partsService.GetPartsByIds(ids.ToString());
+                order.OrderDetails = new List<OrderDetail>();
+                foreach (var part in parts)
+                {
+                    order.OrderDetails.Add(new OrderDetail { Part = part, Price = part.Pricee, Quantity = 1 });
+                }
+                order.Number = random.Next(1000, 100000).ToString();
+            }
 
-        //    var items = (List<Part>)Session["cart"];
 
-        //    //foreach (var i in items)
-        //    //{
-        //    //    var item = addEditDeleteService.GetItemByName(i.Name);
-        //    //    addEditDeleteService.InsertSale(new Sales()
-        //    //    {
-        //    //        ItemId = item.Id,
-        //    //        Date = date,
-        //    //        Quantity = i.Quantity,
-        //    //        ClientId = client.Id
-        //    //    });
-        //    //    item.Quantity -= i.Quantity;
 
-        //    //    addEditDeleteService.UpdateItem(item);
-        //    //}
-        //    //Session.Remove("cart");
 
-        //    return RedirectToAction("Index", "Home");
-        //}
+            ordersService.AddOrder(order);
 
-        //[System.Web.Mvc.ChildActionOnly]
-        //public ActionResult CartSummary()
-        //{
-        //    List<Part> cart;
-        //    if (Session["cart"] == null)
-        //    {
-        //        cart = new List<Part>();
-        //        Session["cart"] = cart;
-        //    }
-        //    else
-        //        cart = (List<Part>)Session["cart"];
+            HttpContext.Session.SetString("itemsToCart", string.Empty);
 
-        //    ViewData["CartCount"] = cart.Count();
-        //    return PartialView("CartSummary");
-        //}
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

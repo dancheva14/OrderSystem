@@ -11,9 +11,9 @@ namespace OrderSystem.Services.Services
     public class StatusDatabaseService : IStatusDatabaseService
     {
         OrderSystemDbContext dbContext;
-        public StatusDatabaseService(OrderSystemDbContext dbcon)
+        public StatusDatabaseService()
         {
-            dbContext = dbcon;
+            dbContext = new OrderSystemDbContext(); 
         }
 
         public List<Status> GetStatuss()

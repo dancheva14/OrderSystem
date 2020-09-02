@@ -11,6 +11,8 @@ namespace OrderSystem.Services.Interfaces
 
         Part GetPart(int id);
 
+        List<Part> GetPartsByIds(string ids);
+
         void AddPart(Part part);
 
         void DeletePart(Part part);

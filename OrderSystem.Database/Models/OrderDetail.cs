@@ -11,7 +11,7 @@ namespace OrderSystem.Database.Models
         public int OrderDetailId { get; set; }
 
         public int PartId { get; set; }
-        public Part Part { get; set; }
+        public virtual Part Part { get; set; }
 
         [Display(Name = "Количество")]
         public int Quantity { get; set; }
@@ -21,6 +21,6 @@ namespace OrderSystem.Database.Models
 
         public int OrderId { get; set; }
 
-        public Order Order { get; set; }
+        public virtual Order Order { get; set; }
     }
 }

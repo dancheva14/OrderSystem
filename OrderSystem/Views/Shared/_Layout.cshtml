@@ -10,31 +10,35 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">OrderSystem</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Проследи пратка</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="NewOrder" asp-action="Index">Нова поръчка</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Parts" asp-action="PartsList">Артикули</a>
-                        </li>
+            <div style="padding-left:2px;display:inline-flex">
+                <a id="homeMenu" class="nav-item" style="padding:2px" asp-area=""   asp-controller="Home" asp-action="Index">
+                    <img src="~/images/home.png" width="35" height="35" />
+                </a>
+            @*<a class="navbar-brand"  asp-area="" asp-controller="Home" asp-action="Index">OrderSystem</a>*@
 
-                        <li class="nav-item dropdown">
-                            @*@if (User != null && User.Identity.IsAuthenticated && User.IsAdmin)
-            {*@
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <div style="float:right;padding-right:2px;">
+                    <partial name="_LoginPartial" />
+                </div>
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="FindOrder">Проследи пратка</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Parts" asp-action="PartsList">Артикули</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="OrdersList">Поръчки</a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+
+                        @if (User != null && User.Identity.IsAuthenticated)
+                        {
                             <a class="dropdown-toggle nav-link text-dark" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Добави<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
@@ -44,14 +48,13 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="AddBrandDetail">Модел</a>
                                     <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="AddPartner">Партньор</a>
                                     <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="AddStatus">Статус на поръчката</a>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="AdminManagment" asp-action="AddAdmin">Администратор</a>
                                 </li>
                             </ul>
-                            @* }*@
+                        }
 
-                        <li class="nav-item dropdown">
-                            @*@if (User != null && User.Identity.IsAuthenticated && User.IsAdmin)
-            {*@
+                    <li class="nav-item dropdown">
+                        @if (User != null && User.Identity.IsAuthenticated)
+                        {
                             <a class="dropdown-toggle nav-link text-dark" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Редактирай<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
@@ -64,11 +67,10 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="AdminEditManagment" asp-action="GetListUser">Потребител</a>
                                 </li>
                             </ul>
+                        }
 
-                        <li>@Html.ActionLink("Потребители", "EditUserRoles", "User")</li>
-                        @* }*@
-                    </ul>
-                </div>
+                </ul>
+            </div>
             </div>
         </nav>
     </header>

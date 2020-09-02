@@ -1,0 +1,39 @@
+﻿@model OrderSystem.Database.Models.Order
+
+@using (Html.BeginForm("FindOrder", "Orders", FormMethod.Post))
+{
+<fieldset>
+    <legend>Въведете номер на поръчката</legend>
+    <div style="top: 50%; width: 100%">
+        <div style="top:50%; width: 500px;">
+            <div class="editor-label">Номер :</div>
+            <div class="editor-field">
+                <input class="form-control"
+                       id="Number"
+                       name="Number"
+                       type="text"
+                       placeholder="номер на поръчка" />
+            </div>
+            <br />
+
+            <br />
+            <div>
+                <input class="col-12" type="submit" value=Запази />
+            </div>
+        </div>
+    </div>
+</fieldset>
+}
+<style>
+    fieldset {
+        margin: 20px;
+        border: 1px solid silver;
+        padding: 8px;
+        border-radius: 4px;
+        width: 550px;
+    }
+
+    legend {
+        padding: 2px;
+    }
+</style>

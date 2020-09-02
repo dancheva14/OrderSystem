@@ -1,0 +1,39 @@
+﻿@model OrderSystem.ViewModels.OrderViewModel
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Промяна на статус на поръчка</legend>
+        <div style="top: 50%; width: 100%">
+            @Html.HiddenFor(m => m.Order.OrderId)
+            <div style="top:50%; width: 500px;">
+                <div class="editor-label">Поръчка номер: @Model.Order.Number</div>
+                <div class="editor-label">Текущ статус на поръчката: @Model.Status.Name</div>
+                <div>
+                    @Html.Label("Нов статус: ")
+                    @Html.DropDownListFor(m => m.Status.StatusId, new SelectList(new OrderSystem.Services.Services.StatusDatabaseService().GetStatuss(), "StatusId", "Name"), "Избери", htmlAttributes: new { @class = "custom-class-for-width form-control" })
+
+                </div>
+                <br />
+
+                <br />
+                <div>
+                    <input class="col-12" type="submit" value=Запази />
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}
+<style>
+    fieldset {
+        margin: 20px;
+        border: 1px solid silver;
+        padding: 8px;
+        border-radius: 4px;
+        width: 550px;
+    }
+
+    legend {
+        padding: 2px;
+    }
+</style>

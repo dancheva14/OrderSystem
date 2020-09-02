@@ -31,23 +31,19 @@ namespace OrderSystem.Controllers
         [HttpGet]
         public IActionResult GetListCategory()
         {
-
-            //var user = User.Identity.Name;
-            //if (user == null)
-            //    return RedirectToAction("Login", "User");
-            //else
-            return View(categoryService.GetCategorys());
+            if (User.Identity.Name == null)
+                return RedirectToAction("Login", "User");
+            else
+                return View(categoryService.GetCategorys());
         }
 
         [HttpGet]
         public IActionResult EditCategory(int id = 0)
         {
-
-            //var user = User.Identity.Name;
-            //if (user == null)
-            //    return RedirectToAction("Login", "User");
-            //else
-            return View(categoryService.GetCategory(id));
+            if (User.Identity.Name == null)
+                return RedirectToAction("Login", "User");
+            else
+                return View(categoryService.GetCategory(id));
         }
 
         [HttpPost]
@@ -69,23 +65,19 @@ namespace OrderSystem.Controllers
         [HttpGet]
         public IActionResult GetListPartner()
         {
-
-            //var user = User.Identity.Name;
-            //if (user == null)
-            //    return RedirectToAction("Login", "User");
-            //else
-            return View(partnerService.GetPartners());
+            if (User.Identity.Name == null)
+                return RedirectToAction("Login", "User");
+            else
+                return View(partnerService.GetPartners());
         }
 
         [HttpGet]
         public IActionResult EditPartner(int id = 0)
         {
-
-            //var user = User.Identity.Name;
-            //if (user == null)
-            //    return RedirectToAction("Login", "User");
-            //else
-            return View(partnerService.GetPartner(id));
+            if (User.Identity.Name == null)
+                return RedirectToAction("Login", "User");
+            else
+                return View(partnerService.GetPartner(id));
         }
 
         [HttpPost]
@@ -107,23 +99,19 @@ namespace OrderSystem.Controllers
         [HttpGet]
         public IActionResult GetListBrandDetail()
         {
-
-            //var user = User.Identity.Name;
-            //if (user == null)
-            //    return RedirectToAction("Login", "User");
-            //else
-            return View(brandService.GetAllBrandDetails());
+            if (User.Identity.Name == null)
+                return RedirectToAction("Login", "User");
+            else
+                return View(brandService.GetAllBrandDetails());
         }
 
         [HttpGet]
         public IActionResult EditBrandDetail(int id = 0)
         {
-
-            //var user = User.Identity.Name;
-            //if (user == null)
-            //    return RedirectToAction("Login", "User");
-            //else
-            return View(brandService.GetBrandDetail(id));
+            if (User.Identity.Name == null)
+                return RedirectToAction("Login", "User");
+            else
+                return View(brandService.GetBrandDetail(id));
         }
 
         [HttpPost]
@@ -161,23 +149,19 @@ namespace OrderSystem.Controllers
         [HttpGet]
         public IActionResult EditBrand(int id = 0)
         {
-
-            //var user = User.Identity.Name;
-            //if (user == null)
-            //    return RedirectToAction("Login", "User");
-            //else
-            return View(brandService.GetBrand(id));
+            if (User.Identity.Name == null)
+                return RedirectToAction("Login", "User");
+            else
+                return View(brandService.GetBrand(id));
         }
 
         [HttpGet]
         public IActionResult GetListBrands()
         {
-
-            //var user = User.Identity.Name;
-            //if (user == null)
-            //    return RedirectToAction("Login", "User");
-            //else
-            return View(brandService.GetBrands());
+            if (User.Identity.Name == null)
+                return RedirectToAction("Login", "User");
+            else
+                return View(brandService.GetBrands());
         }
 
         [HttpPost]
@@ -200,23 +184,19 @@ namespace OrderSystem.Controllers
         [HttpGet]
         public IActionResult GetListStatus()
         {
-
-            //var user = User.Identity.Name;
-            //if (user == null)
-            //    return RedirectToAction("Login", "User");
-            //else
-            return View(statusService.GetStatuss());
+            if (User.Identity.Name == null)
+                return RedirectToAction("Login", "User");
+            else
+                return View(statusService.GetStatuss());
         }
 
         [HttpGet]
         public IActionResult EditStatus(int id = 0)
         {
-
-            //var user = User.Identity.Name;
-            //if (user == null)
-            //    return RedirectToAction("Login", "User");
-            //else
-            return View(statusService.GetStatus(id));
+            if (User.Identity.Name == null)
+                return RedirectToAction("Login", "User");
+            else
+                return View(statusService.GetStatus(id));
         }
 
         [HttpPost]
@@ -238,23 +218,19 @@ namespace OrderSystem.Controllers
         [HttpGet]
         public IActionResult GetListPart()
         {
-
-            //var user = User.Identity.Name;
-            //if (user == null)
-            //    return RedirectToAction("Login", "User");
-            //else
-            return View(partService.GetParts());
+            if (User.Identity.Name == null)
+                return RedirectToAction("Login", "User");
+            else
+                return View(partService.GetParts());
         }
 
         [HttpGet]
         public IActionResult EditPart(int id = 0)
         {
-
-            //var user = User.Identity.Name;
-            //if (user == null)
-            //    return RedirectToAction("Login", "User");
-            //else
-            return View(partService.GetPart(id));
+            if (User.Identity.Name == null)
+                return RedirectToAction("Login", "User");
+            else
+                return View(partService.GetPart(id));
         }
 
         [HttpPost]

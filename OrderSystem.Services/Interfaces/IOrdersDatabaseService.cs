@@ -11,6 +11,8 @@ namespace OrderSystem.Services.Interfaces
 
         Order GetOrder(int id);
 
+        Order GetOrderByNumber(string number);
+
         void AddOrder(Order order);
 
         void DeleteOrder(Order order);

@@ -15,6 +15,6 @@ namespace OrderSystem.Database.Models
         [Display(Name = "Булстат")]
         public string Bulstat { get; set; }
 
-        public List<Order> Orders { get; set; }
+        public virtual List<Order> Orders { get; set; }
     }
 }

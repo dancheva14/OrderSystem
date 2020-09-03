@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OrderSystem.Database.Models;
@@ -15,15 +16,17 @@ namespace OrderSystem.Controllers
         IPartsDatabaseService partService;
         IStatusDatabaseService statusService;
         IBrandsDatabaseService brandService;
+        IUserDatabaseService userService;
 
         public AdminEditManagment(ICategoryDatabaseService categorySer, IPartnersDatabaseService partnerSer, IPartsDatabaseService partSer
-            , IStatusDatabaseService statusSer, IBrandsDatabaseService brandSer)
+            , IStatusDatabaseService statusSer, IBrandsDatabaseService brandSer, IUserDatabaseService userDatabaseService)
         {
             categoryService = categorySer;
             partnerService = partnerSer;
             partService = partSer;
             statusService = statusSer;
             brandService = brandSer;
+            userService = userDatabaseService;
         }
 
         #region Category
@@ -50,13 +53,13 @@ namespace OrderSystem.Controllers
         public IActionResult EditCategory(Category category)
         {
             categoryService.UpdateCategory(category);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetListCategory", "AdminEditManagment");
         }
         [HttpPost]
         public IActionResult DeleteCategory(Category category)
         {
             categoryService.DeleteCategory(category);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetListCategory", "AdminEditManagment");
         }
         #endregion
 
@@ -84,14 +87,14 @@ namespace OrderSystem.Controllers
         public IActionResult EditPartner(Partner partner)
         {
             partnerService.UpdatePartner(partner);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetListPartner", "AdminEditManagment");
         }
 
         [HttpPost]
         public IActionResult DeletePartner(Partner partner)
         {
             partnerService.DeletePartner(partner);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetListPartner", "AdminEditManagment");
         }
         #endregion
 
@@ -118,14 +121,14 @@ namespace OrderSystem.Controllers
         public IActionResult EditBrandDetail(BrandDetail brandDetail)
         {
             brandService.UpdateBrandDetail(brandDetail);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetListBrandDetail", "AdminEditManagment");
         }
 
         [HttpPost]
         public IActionResult DeleteBrandDetail(BrandDetail brandDetail)
         {
             brandService.DeleteBrandDetail(brandDetail);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetListBrandDetail", "AdminEditManagment");
         }
 
 
@@ -168,14 +171,14 @@ namespace OrderSystem.Controllers
         public IActionResult EditBrand(Brand brand)
         {
             brandService.UpdateBrand(brand);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetListBrands", "AdminEditManagment");
         }
 
         [HttpPost]
         public IActionResult DeleteBrand(Brand brand)
         {
             brandService.DeleteBrand(brand);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetListBrands", "AdminEditManagment");
         }
         #endregion
 
@@ -203,14 +206,14 @@ namespace OrderSystem.Controllers
         public IActionResult EditStatus(Status status)
         {
             statusService.UpdateStatus(status);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetListStatus", "AdminEditManagment");
         }
 
         [HttpPost]
         public IActionResult DeleteStatus(Status status)
         {
             statusService.DeleteStatus(status);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetListStatus", "AdminEditManagment");
         }
         #endregion
 
@@ -237,14 +240,54 @@ namespace OrderSystem.Controllers
         public IActionResult EditPart(Part part)
         {
             partService.UpdatePart(part);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetListPart", "AdminEditManagment");
         }
 
         [HttpPost]
         public IActionResult DeletePart(Part part)
         {
             partService.DeletePart(part);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetListPart", "AdminEditManagment");
+        }
+        #endregion
+
+        #region User
+
+        [HttpGet]
+        public IActionResult GetListUser()
+        {
+            if (User.Identity.Name == null)
+                return RedirectToAction("Login", "User");
+            else
+                return View(userService.GetUsers());
+        }
+
+        [HttpGet]
+        public IActionResult EditUser(string id)
+        {
+            if (User.Identity.Name == null)
+                return RedirectToAction("Login", "User");
+            else
+            {
+               var user = userService.GetUsers().FirstOrDefault(u => u.Id == id);
+                UserViewModel vm = new UserViewModel();
+                vm.User = user;
+                return View(vm);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult EditUser(UserViewModel userVm)
+        {
+            userService.UpdateRole(userVm.User.Id, userVm.Role.Id);
+            return RedirectToAction("GetListUser", "AdminEditManagment");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteUser(User user)
+        {
+            userService.DeleteUser(user);
+            return RedirectToAction("GetListUser", "AdminEditManagment");
         }
         #endregion
     }

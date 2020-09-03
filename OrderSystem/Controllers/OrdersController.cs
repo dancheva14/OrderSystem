@@ -61,7 +61,6 @@ namespace OrderSystem.Controllers
         [HttpGet]
         public IActionResult FindOrder()
         {
-            // var orders = ordersService.GetOrders().Where(o => o.User.UserName == User.Identity.Name);
             return View();
         }
 

@@ -522,3 +522,8 @@ C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\obj\Debug\netcorea
 C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\obj\Debug\netcoreapp3.1\Razor\Views\Orders\OrdersList.cshtml.g.cs
 C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\obj\Debug\netcoreapp3.1\Razor\Views\Orders\FindOrder.cshtml.g.cs
 C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\obj\Debug\netcoreapp3.1\Razor\Views\Orders\Orders.cshtml.g.cs
+C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\obj\Debug\netcoreapp3.1\Razor\Views\Report\DateReport.cshtml.g.cs
+C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\obj\Debug\netcoreapp3.1\Razor\Views\Report\StatusReport.cshtml.g.cs
+C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\obj\Debug\netcoreapp3.1\Razor\Views\Report\UsersReport.cshtml.g.cs
+C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\obj\Debug\netcoreapp3.1\Razor\Views\AdminEditManagment\EditUser.cshtml.g.cs
+C:\Users\vivian.dancheva\source\repos\OrderSystem\OrderSystem\obj\Debug\netcoreapp3.1\Razor\Views\AdminEditManagment\GetListUser.cshtml.g.cs

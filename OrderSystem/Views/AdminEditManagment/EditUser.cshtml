@@ -1,0 +1,38 @@
+﻿@model OrderSystem.ViewModels.UserViewModel
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Редактирай статус</legend>
+        <div style="top: 50%; width: 100%">
+            @Html.HiddenFor(m => m.User.Id)
+            <div style="top:50%; width: 500px;">
+                <div class="editor-label">@Html.Label(Model.User.UserName)</div>
+                <div>
+                    @Html.Label("Роля: ")
+                    @Html.DropDownListFor(m => m.Role.Id, new SelectList(new OrderSystem.Services.Services.RoleDatabaseService().GetRoles(), "Id", "Name"), "Избери", htmlAttributes: new { @class = "custom-class-for-width form-control" })
+
+                </div>
+                <br />
+
+                <br />
+                <div>
+                    <input class="col-12" type="submit" value=Запази />
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}
+<style>
+    fieldset {
+        margin: 20px;
+        border: 1px solid silver;
+        padding: 8px;
+        border-radius: 4px;
+        width: 550px;
+    }
+
+    legend {
+        padding: 2px;
+    }
+</style>

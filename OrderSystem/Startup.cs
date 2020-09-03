@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using OrderSystem.Services;
 
 namespace OrderSystem
 {
@@ -54,7 +55,8 @@ namespace OrderSystem
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env
             , UserManager<User> userManager,
-            RoleManager<Role> roleManager)
+            RoleManager<Role> roleManager,
+            IRoleDatabaseService roleDbService)
         {
             if (env.IsDevelopment())
             {
@@ -84,6 +86,9 @@ namespace OrderSystem
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+
+            IdentityDataInitializer.SeedData(userManager, roleManager, roleDbService).Wait();
         }
 
         private void RegisterServices(IServiceCollection services)
@@ -94,6 +99,8 @@ namespace OrderSystem
             services.AddScoped<IStatusDatabaseService, StatusDatabaseService>();
             services.AddScoped<IPartsDatabaseService, PartsDatabaseService>();
             services.AddScoped<IOrdersDatabaseService, OrdersDatabaseService>();
+            services.AddScoped<IUserDatabaseService, UserDatabaseService>();
+            services.AddScoped<IRoleDatabaseService, RoleDatabaseService>();
 
             services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
         }

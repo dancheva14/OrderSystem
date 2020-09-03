@@ -18,19 +18,23 @@ namespace OrderSystem.Controllers
         IOrdersDatabaseService ordersService;
         IPartnersDatabaseService partnerService;
         IStatusDatabaseService statusService;
+        IUserDatabaseService userService;
 
-        public ShoppingCartController(IPartsDatabaseService partsDatabaseService,IOrdersDatabaseService ordersDatabaseService, IPartnersDatabaseService partnersDatabase,IStatusDatabaseService statusDatabase)
+        public ShoppingCartController(IPartsDatabaseService partsDatabaseService, IOrdersDatabaseService ordersDatabaseService
+            , IPartnersDatabaseService partnersDatabase, IStatusDatabaseService statusDatabase, IUserDatabaseService usDatabase)
         {
             partsService = partsDatabaseService;
             ordersService = ordersDatabaseService;
             partnerService = partnersDatabase;
             statusService = statusDatabase;
+            userService = usDatabase;
         }
 
         public IActionResult Cart()
         {
             Random random = new Random();
             var order = new Order();
+            order.OrderDetails = new List<OrderDetail>();
 
             if (User.Identity.Name == null)
                 return RedirectToAction("Login", "User");
@@ -40,7 +44,6 @@ namespace OrderSystem.Controllers
                 if (!string.IsNullOrEmpty(ids))
                 {
                     var parts = partsService.GetPartsByIds(ids.ToString());
-                    order.OrderDetails = new List<OrderDetail>();
                     foreach (var part in parts)
                     {
                         order.OrderDetails.Add(new OrderDetail { Part = part, Price = part.Pricee, Quantity = 1 });
@@ -49,8 +52,9 @@ namespace OrderSystem.Controllers
                     return View(order);
                 }
                 else
-                    return RedirectToAction("Index", "Home");
-
+                {
+                    return View(order);
+                }
             }
         }
 
@@ -74,11 +78,11 @@ namespace OrderSystem.Controllers
             order.Amount = order.OrderDetails.Sum(a => a.Price * a.Quantity);
             order.PartnerId = partnerService.GetPartners().FirstOrDefault().PartnerId;
             order.StatusId = statusService.GetStatuss().FirstOrDefault().StatusId;
-            order.UserId = "81781c97-7def-4973-9b78-de0897b3c37f";
+            order.UserId = userService.GetUsers().FirstOrDefault(u => u.UserName == User.Identity.Name).Id;
             order.Partner = null;
             order.Status = null;
             order.User = null;
-         
+
             ordersService.AddOrder(order);
 
             HttpContext.Session.SetString("itemsToCart", string.Empty);

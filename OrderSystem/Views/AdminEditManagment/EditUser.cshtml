@@ -3,12 +3,12 @@
 @using (Html.BeginForm())
 {
     <fieldset>
-        <legend>Редактирай статус</legend>
+        <legend>Редактирай потребител</legend>
         <div style="top: 50%; width: 100%">
             @Html.HiddenFor(m => m.User.Id)
             <div style="top:50%; width: 500px;">
-                <div class="editor-label">@Html.Label(Model.User.UserName)</div>
-                <div>
+                <div class="editor-label">@Model.User.UserName</div>
+                <div style="margin-top:5px;">
                     @Html.Label("Роля: ")
                     @Html.DropDownListFor(m => m.Role.Id, new SelectList(new OrderSystem.Services.Services.RoleDatabaseService().GetRoles(), "Id", "Name"), "Избери", htmlAttributes: new { @class = "custom-class-for-width form-control" })
 

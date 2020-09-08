@@ -29,6 +29,10 @@ namespace OrderSystem.Controllers
                     var orders = ordersService.GetOrders().Where(o => o.User.UserName == User.Identity.Name);
                     return View(orders);
                 }
+                else if(orderId == -1)
+                {
+                    return View(new List<Order>());
+                }
                 else
                 {
                     List<Order> orders = new List<Order>();
@@ -69,8 +73,10 @@ namespace OrderSystem.Controllers
         {
             var order = ordersService.GetOrderByNumber(number);
 
-
-            return RedirectToAction("OrdersList", "Orders", new { orderId = order.OrderId });
+            if (order != null)
+                return RedirectToAction("OrdersList", "Orders", new { orderId = order.OrderId });
+            else
+                return RedirectToAction("OrdersList", "Orders", new { orderId = -1 });
         }
     }
 }

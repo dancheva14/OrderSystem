@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using OrderSystem.Database.Models;
 using OrderSystem.Services.Interfaces;
 using OrderSystem.ViewModels;
@@ -37,7 +38,10 @@ namespace OrderSystem.Controllers
                 else
                 {
                     viewModel.Orders.AddRange(ordersService.GetOrders().Where(o => o.UserId == userId));
-                    viewModel.User = viewModel.Orders.FirstOrDefault().User;
+                    if (viewModel.Orders.Count() > 0)
+                        viewModel.User = viewModel.Orders?.FirstOrDefault().User;
+                    else
+                        viewModel.User = new User();
                     return View(viewModel);
                 }
             }
@@ -98,7 +102,11 @@ namespace OrderSystem.Controllers
                 else
                 {
                     viewModel.Orders.AddRange(ordersService.GetOrders().Where(o => o.StatusId == statusId));
-                    viewModel.Status = viewModel.Orders.FirstOrDefault().Status;
+                    if (viewModel.Orders.Count() > 0)
+                        viewModel.Status = viewModel.Orders.FirstOrDefault().Status;
+                    else
+                        viewModel.Status = new Status();
+
                     return View(viewModel);
                 }
             }

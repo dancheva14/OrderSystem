@@ -12,9 +12,9 @@ namespace OrderSystem.Services.Services
     public class PartnersDatabaseService : IPartnersDatabaseService
     {
         OrderSystemDbContext dbContext;
-        public PartnersDatabaseService(OrderSystemDbContext dbcon)
+        public PartnersDatabaseService()
         {
-            dbContext = dbcon;
+            dbContext = new OrderSystemDbContext();
         }
 
         public List<Partner> GetPartners()

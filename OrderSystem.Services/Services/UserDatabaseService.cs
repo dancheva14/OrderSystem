@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using OrderSystem.Database;
 using OrderSystem.Database.Models;
 using OrderSystem.Services.Interfaces;
@@ -6,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace OrderSystem.Services.Services
 {
@@ -30,14 +33,15 @@ namespace OrderSystem.Services.Services
             return dbContext.Users.ToList();
         }
 
-        public void UpdateRole(string id, string roleId)
+        public async Task UpdateRole(string id, string roleId)
         {
-            var user = dbContext.Users.FirstOrDefault(u => u.Id == id);
-            var role = dbContext.Roles.FirstOrDefault(r => r.Id == roleId);
-            userManager.AddToRoleAsync(user, role.Name).Wait();
+            var oldUser = await userManager.FindByIdAsync(id);
+
+            await userManager.RemoveFromRoleAsync(oldUser, dbContext.Roles.FirstOrDefault(r=>r.Id != roleId).Name);
+            await userManager.AddToRoleAsync(oldUser, dbContext.Roles.FirstOrDefault(r => r.Id == roleId).Name);
+
             dbContext.SaveChanges();
 
-            userManager.Dispose();
         }
 
         public void DeleteUser(User user)

@@ -76,7 +76,8 @@ namespace OrderSystem.Controllers
             }
             order.Date = DateTime.Now;
             order.Amount = order.OrderDetails.Sum(a => a.Price * a.Quantity);
-            order.PartnerId = partnerService.GetPartners().FirstOrDefault().PartnerId;
+            order.PartnerId = order.PartnerId;
+            order.Address = order.Address;
             order.StatusId = statusService.GetStatuss().FirstOrDefault().StatusId;
             order.UserId = userService.GetUsers().FirstOrDefault(u => u.UserName == User.Identity.Name).Id;
             order.Partner = null;

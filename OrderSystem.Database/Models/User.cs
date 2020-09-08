@@ -16,5 +16,6 @@ namespace OrderSystem.Database.Models
         public override string PhoneNumber { get; set; }
 
         public virtual List<Order> Orders { get; set; }
+
     }
 }

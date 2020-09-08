@@ -84,6 +84,7 @@ namespace OrderSystem.Database
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             base.OnConfiguring(builder);
+            builder.EnableSensitiveDataLogging();
 
             builder.UseSqlServer("Server=.;Database=OrderSystemDatabase;User Id=sa;Password=Micr0!nvest;");
         }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OrderSystem.Database.Models;
@@ -269,7 +270,7 @@ namespace OrderSystem.Controllers
                 return RedirectToAction("Login", "User");
             else
             {
-               var user = userService.GetUsers().FirstOrDefault(u => u.Id == id);
+                var user = userService.GetUsers().FirstOrDefault(u => u.Id == id);
                 UserViewModel vm = new UserViewModel();
                 vm.User = user;
                 return View(vm);
@@ -277,9 +278,9 @@ namespace OrderSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditUser(UserViewModel userVm)
+        public async Task<IActionResult> EditUser(UserViewModel userVm)
         {
-            userService.UpdateRole(userVm.User.Id, userVm.Role.Id);
+            await userService.UpdateRole(userVm.User.Id, userVm.Role.Id);
             return RedirectToAction("GetListUser", "AdminEditManagment");
         }
 

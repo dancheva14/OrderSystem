@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace OrderSystem.Services.Interfaces
 {
@@ -9,7 +10,7 @@ namespace OrderSystem.Services.Interfaces
     {
         List<User> GetUsers();
 
-        void UpdateRole(string id, string roleId);
+        Task UpdateRole(string id, string roleId);
 
         void DeleteUser(User user);
     }

@@ -59,6 +59,7 @@
             <tbody style="width:100%; overflow-x:hidden;">
                 @for (int i = 0; i < Model.OrderDetails.Count; i++)
                 {
+                    @Html.HiddenFor(a => Model.OrderDetails[i].Quantity)
                     <tr class="d-flex">
                         <td class="col-3 column-break-word">
                             @Model.OrderDetails[i].Part.Name
@@ -74,6 +75,8 @@
                                    value="@Model.OrderDetails[i].Quantity"
                                    type="text"
                                    placeholder="количество" />
+
+                            <input type="hidden" name="OrderDetails[i].Quantity" />
                         </td>
 
                         <td class="col-2">
@@ -83,9 +86,11 @@
                             Двигател: @Model.OrderDetails[i].Part.BrandDetail.EngineType, к.с. @Model.OrderDetails[i].Part.BrandDetail.Power
                         </td>
                         <td class="col-1">
-                            <button id="gosho" type="button" class="delete btn btn-outline-danger btn-sm docs-table-body-delete-btn" data-id="@Model.OrderDetails[i].Part.PartId">✕</button>
+                            <button onclick="DeleteFunc()" type="button" class="delete btn btn-outline-danger btn-sm docs-table-body-delete-btn" data-id="@Model.OrderDetails[i].Part.PartId">✕</button>
                         </td>
                     </tr>
+                    @Html.HiddenFor(a => Model.OrderDetails[i].Price)
+                    @Html.HiddenFor(a => Model.OrderDetails[i].Part.PartId)
                     //  @Html.Hidden("PartId", "", new { id = Model.OrderDetails[i].Part.PartId })
                 }
             </tbody>
@@ -105,9 +110,9 @@ else
     <h4>Моля, изберете стоки за поръчката от меню "Артикули".</h4>
 }
 
-@*<script>
-        $('#gosho').click(function () {
-            var id = $('#PartId').val();
+<script>
+    function DeleteFunc() {
+        var id = $(this).attr("data-id");
             alert(id);
             var url = '/ShoppingCart/Delete'
 
@@ -121,7 +126,7 @@ else
             });
         }
 
-    </script>*@
+    </script>
 <style>
     .column-break-word {
         word-break: break-all;

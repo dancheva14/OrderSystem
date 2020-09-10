@@ -24,7 +24,7 @@ namespace OrderSystem.Database.Models
 
         public virtual Status Status { get; set; }
 
-        public int PartnerId { get; set; }
+        public int? PartnerId { get; set; }
 
         public virtual Partner Partner { get; set; }
 

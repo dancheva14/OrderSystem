@@ -70,7 +70,7 @@ namespace OrderSystem.Controllers
                 order.OrderDetails = new List<OrderDetail>();
                 foreach (var part in parts)
                 {
-                    order.OrderDetails.Add(new OrderDetail { Part = part, Price = part.Pricee, Quantity = 1 });
+                    order.OrderDetails.Add(new OrderDetail { PartId = part.PartId, Price = part.Pricee, Quantity = 1, Part = null }) ;
                 }
                 order.Number = random.Next(1000, 100000).ToString();
             }
@@ -92,33 +92,26 @@ namespace OrderSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddToCart(int itemId = 0)
-        {
-            //var user = Session["User"] as User;
-            //if (user == null)
-            //    return RedirectToAction("Login", "User");
-            //else
-            // Return the view
-            return View();
-        }
-        [HttpPost]
         public IActionResult Delete(int id)
         {
             var ids = HttpContext.Session.GetString("itemsToCart");
 
-            List<string> idArr = ids.Split(",").ToList();
-
-            idArr.Remove(id.ToString());
-            string newIds = string.Empty;
-            foreach (var item in idArr)
+            if (!string.IsNullOrEmpty(ids))
             {
-                if (!string.IsNullOrEmpty(newIds))
-                    newIds += item;
-                else
-                    newIds = item;
-            }
+                List<string> idArr = ids.Split(",").ToList();
 
-            HttpContext.Session.SetString("itemsToCart", newIds);
+                idArr.Remove(id.ToString());
+                string newIds = string.Empty;
+                foreach (var item in idArr)
+                {
+                    if (!string.IsNullOrEmpty(newIds))
+                        newIds += item;
+                    else
+                        newIds = item;
+                }
+
+                HttpContext.Session.SetString("itemsToCart", newIds);
+            }
 
             return RedirectToAction("Cart", "ShoppingCart");
         }
@@ -138,9 +131,6 @@ namespace OrderSystem.Controllers
                 }
                 order.Number = random.Next(1000, 100000).ToString();
             }
-
-
-
 
             ordersService.AddOrder(order);
 

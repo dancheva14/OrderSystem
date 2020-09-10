@@ -56,7 +56,11 @@ namespace OrderSystem
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env
             , UserManager<User> userManager,
             RoleManager<Role> roleManager,
-            IRoleDatabaseService roleDbService)
+            IRoleDatabaseService roleDbService, IUserDatabaseService userDatabaseService
+            , IPartnersDatabaseService partnersDatabase
+            , IBrandsDatabaseService brandsDatabaseService
+            , ICategoryDatabaseService categoryDatabaseService
+            , IStatusDatabaseService statusDatabaseService)
         {
             if (env.IsDevelopment())
             {
@@ -88,7 +92,7 @@ namespace OrderSystem
             });
 
 
-            IdentityDataInitializer.SeedData(userManager, roleManager, roleDbService).Wait();
+            IdentityDataInitializer.SeedData(userManager, roleManager, roleDbService,userDatabaseService,partnersDatabase,brandsDatabaseService,categoryDatabaseService,statusDatabaseService).Wait();
         }
 
         private void RegisterServices(IServiceCollection services)

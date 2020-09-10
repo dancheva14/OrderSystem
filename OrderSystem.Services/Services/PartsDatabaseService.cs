@@ -58,10 +58,11 @@ namespace OrderSystem.Services.Services
 
             foreach (var item in idStr)
             {
-                idArr.Add(Convert.ToInt32(item));
+                if (!string.IsNullOrEmpty(item))
+                    idArr.Add(Convert.ToInt32(item));
             }
 
-            return dbContext.Parts.Where(p => idArr.Contains(p.PartId)).Include(b=>b.BrandDetail).ThenInclude(a=>a.Brand).ToList();
+            return dbContext.Parts.Where(p => idArr.Contains(p.PartId)).Include(b => b.BrandDetail).ThenInclude(a => a.Brand).ToList();
         }
     }
 }

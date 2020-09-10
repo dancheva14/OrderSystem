@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using OrderSystem.Database.Models;
+using OrderSystem.Services.Interfaces;
 
 namespace OrderSystem.Areas.Identity.Pages.Account
 {
@@ -24,15 +25,17 @@ namespace OrderSystem.Areas.Identity.Pages.Account
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
         private readonly ILogger<RegisterModel> _logger;
+        private readonly IUserDatabaseService userDatabaseService;
 
         public RegisterModel(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-            ILogger<RegisterModel> logger)
+            ILogger<RegisterModel> logger,IUserDatabaseService userDatabase)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            userDatabaseService = userDatabase;
         }
 
         [BindProperty]
@@ -73,11 +76,17 @@ namespace OrderSystem.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                
                 var user = new User { UserName = Input.Email, Email = Input.Email };
+
                 user.EmailConfirmed = true;
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    if (userDatabaseService.GetUsers().Count() == 1)
+                    {
+                        await _userManager.AddToRoleAsync(user, "Admin");
+                    }
                     _logger.LogInformation("Потребителя създаде нов акаунт с парола.");
 
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

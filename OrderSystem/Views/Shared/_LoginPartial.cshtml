@@ -4,30 +4,29 @@
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 
-<ul class="nav navbar-nav" style="margin-left:600px;">
+<ul class="nav navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
-        <li class="nav-item" style="padding-right: 2px;">
+        <li class="nav-item" style="vertical-align: central; margin-left:0px;">
             <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserName(User)</a>
         </li>
-        <li class="nav-item" style="padding-right: 2px;">
+        <li class="nav-item" style="vertical-align: central; margin-left:0px;">
             <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Изход</button>
+                <button id="logout" type="submit" class="nav-link btn btn-link text-dark">| Изход</button>
             </form>
         </li>
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingCart" asp-action="Cart">
-                |
-                <img src="~/images/cart.jpg" width="30" height="30" />
+                |<img src="~/images/cart.jpg" width="30" height="30" />
             </a>
         </li>
     }
     else
     {
-        <li class="nav-item" style="padding-right: 2px;">
+        <li class="nav-item" style="vertical-align: central; margin-right:20px; margin-left:0px;">
             <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Регистрация</a>
         </li>
-        <li class="nav-item" style="padding-right: 2px;">
+        <li class="nav-item" style="vertical-align: central; margin-right:20px; margin-left:0px;">
             <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Вход</a>
         </li>
     }

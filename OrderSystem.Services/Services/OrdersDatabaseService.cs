@@ -33,10 +33,17 @@ namespace OrderSystem.Services.Services
 
         public void AddOrder(Order order)
         {
-            if (order != null)
+            try
             {
-                dbContext.Orders.Add(order);
-                dbContext.SaveChanges();
+                if (order != null)
+                {
+                    dbContext.Orders.Add(order);
+                    dbContext.SaveChanges();
+                }
+            }
+            catch(Exception e)
+            {
+
             }
         }
 

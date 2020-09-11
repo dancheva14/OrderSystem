@@ -117,5 +117,37 @@ namespace OrderSystem.Controllers
         {
             return RedirectToAction("StatusReport", "Report", new { statusId = viewModel.Status.StatusId });
         }
+
+        public IActionResult PartnersReport(int partnerId)
+        {
+            if (User.Identity.Name == null)
+                return RedirectToAction("Login", "User");
+            else
+            {
+                PartnerReportViewModel viewModel = new PartnerReportViewModel();
+                viewModel.Orders = new List<Order>();
+                viewModel.Partner = new Partner();
+                viewModel.Partner.Name = string.Empty;
+
+                if (partnerId == 0)
+                {
+                    viewModel.Orders.AddRange(ordersService.GetOrders().Where(p => p.Partner != null));
+                    return View(viewModel);
+                }
+                else
+                {
+                    viewModel.Orders.AddRange(ordersService.GetOrders().Where(o => o.PartnerId == partnerId));
+                    if (viewModel.Orders.Count() > 0)
+                        viewModel.Partner = viewModel.Orders?.FirstOrDefault().Partner;
+                    return View(viewModel);
+                }
+            }
+        }
+
+        [HttpPost]
+        public IActionResult PartnersReport(PartnerReportViewModel viewModel)
+        {
+            return RedirectToAction("PartnersReport", "Report", new { partnerId = viewModel.Partner.PartnerId });
+        }
     }
 }

@@ -85,9 +85,9 @@
                         <td class="col-2">
                             Двигател: @Model.OrderDetails[i].Part.BrandDetail.EngineType, к.с. @Model.OrderDetails[i].Part.BrandDetail.Power
                         </td>
-                        <td class="col-1">
+                        @*<td class="col-1">
                             <button onclick="DeleteFunc(@Model.OrderDetails[i].Part.PartId)" type="button" class="delete btn btn-outline-danger btn-sm docs-table-body-delete-btn" data-id="@Model.OrderDetails[i].Part.PartId">✕</button>
-                        </td>
+                        </td*@>
                     </tr>
                     @Html.HiddenFor(a => Model.OrderDetails[i].Price)
                     @Html.HiddenFor(a => Model.OrderDetails[i].Part.PartId)

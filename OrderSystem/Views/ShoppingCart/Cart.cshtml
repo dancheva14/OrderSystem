@@ -59,7 +59,6 @@
             <tbody style="width:100%; overflow-x:hidden;">
                 @for (int i = 0; i < Model.OrderDetails.Count; i++)
                 {
-                    @Html.HiddenFor(a => Model.OrderDetails[i].Quantity)
                     <tr class="d-flex">
                         <td class="col-3 column-break-word">
                             @Model.OrderDetails[i].Part.Name
@@ -68,17 +67,18 @@
                             @Model.OrderDetails[i].Price
                         </td>
                         <td class="col-2 column-break-word">
-                            <input class="form-control"
+                            @Html.TextBoxFor(x => Model.OrderDetails[i].Quantity, new { @class = "form-control", @style="width:120px; height:30px" })
+                            @*<input class="form-control"
                                    style="width:120px;height:30px;"
                                    id="Quantity"
-                                   name="Quantity"
-                                   value="@Model.OrderDetails[i].Quantity"
+                                   name="@Model.OrderDetails[i].Quantity"
                                    type="text"
-                                   placeholder="количество" />
+                                   asp-for="OrderDetails[i].Quantity"
+                                   placeholder="количество" />*@
 
-                            <input type="hidden" name="OrderDetails[i].Quantity" />
+
                         </td>
-
+                        @Html.HiddenFor(a=>Model.OrderDetails[i])
                         <td class="col-2">
                             @Model.OrderDetails[i].Part.BrandDetail.Brand.Name
                         </td>
@@ -86,7 +86,7 @@
                             Двигател: @Model.OrderDetails[i].Part.BrandDetail.EngineType, к.с. @Model.OrderDetails[i].Part.BrandDetail.Power
                         </td>
                         <td class="col-1">
-                            <button onclick="DeleteFunc()" type="button" class="delete btn btn-outline-danger btn-sm docs-table-body-delete-btn" data-id="@Model.OrderDetails[i].Part.PartId">✕</button>
+                            <button onclick="DeleteFunc(@Model.OrderDetails[i].Part.PartId)" type="button" class="delete btn btn-outline-danger btn-sm docs-table-body-delete-btn" data-id="@Model.OrderDetails[i].Part.PartId">✕</button>
                         </td>
                     </tr>
                     @Html.HiddenFor(a => Model.OrderDetails[i].Price)
@@ -111,22 +111,23 @@ else
 }
 
 <script>
-    function DeleteFunc() {
-        var id = $(this).attr("data-id");
-            alert(id);
-            var url = '/ShoppingCart/Delete'
+    function DeleteFunc(id) {
 
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: {
-                    id: id
-                }
-            }).done(function () {
-            });
-        }
+        //var id = $(this).attr("data-id");
+        alert(id);
+        var url = '/ShoppingCart/Delete'
 
-    </script>
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: {
+                id: id
+            }
+        }).done(function () {
+        });
+    }
+
+</script>
 <style>
     .column-break-word {
         word-break: break-all;

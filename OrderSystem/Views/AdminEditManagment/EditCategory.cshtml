@@ -19,6 +19,7 @@
                 <div>
                     <input class="col-12" type="submit" value=Запази />
                 </div>
+                @Html.ActionLink("Изтрии", "DeleteCategory", "AdminEditManagment", new { id = Model.CategoryId }, null)
             </div>
         </div>
     </fieldset>

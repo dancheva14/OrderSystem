@@ -23,7 +23,7 @@ namespace OrderSystem.Services
             ,IStatusDatabaseService statusDatabaseService)
         {
             await SeedRoles(roleManager, roleDatabaseService);
-            await SeedData(userDatabaseService, partnersDatabase, brandsDatabaseService, categoryDatabaseService, statusDatabaseService);
+            //await SeedData(userDatabaseService, partnersDatabase, brandsDatabaseService, categoryDatabaseService, statusDatabaseService);
 
         }
 

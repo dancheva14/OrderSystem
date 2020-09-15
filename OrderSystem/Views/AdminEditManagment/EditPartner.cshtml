@@ -24,6 +24,7 @@
                 <div>
                     <input class="col-12" type="submit" value=Запази />
                 </div>
+                @Html.ActionLink("Изтрии", "DeletePartner", "AdminEditManagment", new { id = Model.PartnerId }, null)
             </div>
         </div>
     </fieldset>

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Razor.Generator;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OrderSystem.Database.Models;
@@ -56,9 +57,10 @@ namespace OrderSystem.Controllers
             categoryService.UpdateCategory(category);
             return RedirectToAction("GetListCategory", "AdminEditManagment");
         }
-        [HttpPost]
-        public IActionResult DeleteCategory(Category category)
+        
+        public IActionResult DeleteCategory(int id)
         {
+            var category = categoryService.GetCategory(id);
             categoryService.DeleteCategory(category);
             return RedirectToAction("GetListCategory", "AdminEditManagment");
         }
@@ -91,9 +93,9 @@ namespace OrderSystem.Controllers
             return RedirectToAction("GetListPartner", "AdminEditManagment");
         }
 
-        [HttpPost]
-        public IActionResult DeletePartner(Partner partner)
+        public IActionResult DeletePartner(int id)
         {
+            var partner = partnerService.GetPartner(id);
             partnerService.DeletePartner(partner);
             return RedirectToAction("GetListPartner", "AdminEditManagment");
         }
@@ -125,9 +127,9 @@ namespace OrderSystem.Controllers
             return RedirectToAction("GetListBrandDetail", "AdminEditManagment");
         }
 
-        [HttpPost]
-        public IActionResult DeleteBrandDetail(BrandDetail brandDetail)
+        public IActionResult DeleteBrandDetail(int id)
         {
+            var brandDetail = brandService.GetBrandDetail(id);
             brandService.DeleteBrandDetail(brandDetail);
             return RedirectToAction("GetListBrandDetail", "AdminEditManagment");
         }
@@ -175,9 +177,9 @@ namespace OrderSystem.Controllers
             return RedirectToAction("GetListBrands", "AdminEditManagment");
         }
 
-        [HttpPost]
-        public IActionResult DeleteBrand(Brand brand)
+        public IActionResult DeleteBrand(int id)
         {
+            var brand = brandService.GetBrand(id);
             brandService.DeleteBrand(brand);
             return RedirectToAction("GetListBrands", "AdminEditManagment");
         }
@@ -210,9 +212,9 @@ namespace OrderSystem.Controllers
             return RedirectToAction("GetListStatus", "AdminEditManagment");
         }
 
-        [HttpPost]
-        public IActionResult DeleteStatus(Status status)
+        public IActionResult DeleteStatus(int id)
         {
+            var status = statusService.GetStatus(id);
             statusService.DeleteStatus(status);
             return RedirectToAction("GetListStatus", "AdminEditManagment");
         }
@@ -244,9 +246,9 @@ namespace OrderSystem.Controllers
             return RedirectToAction("GetListPart", "AdminEditManagment");
         }
 
-        [HttpPost]
-        public IActionResult DeletePart(Part part)
+        public IActionResult DeletePart(int id)
         {
+            var part = partService.GetPart(id);
             partService.DeletePart(part);
             return RedirectToAction("GetListPart", "AdminEditManagment");
         }

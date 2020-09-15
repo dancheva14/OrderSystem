@@ -20,9 +20,18 @@ else
                 <th class="col-2">
                     Дата
                 </th>
-                <th class="col-3">
-                    Адрес
-                </th>
+                @if (User != null && User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <th class="col-3">
+                        Партньор
+                    </th>
+                }
+                else
+                {
+                    <th class="col-3">
+                        Адрес
+                    </th>
+                }
                 <th class="col-3">
                     Статус
                 </th>
@@ -43,9 +52,18 @@ else
                     <td class="col-2 column-break-word">
                         @item.Date
                     </td>
-                    <td class="col-3 column-break-word">
-                        @item.Address
-                    </td>
+                    @if (User != null && User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <td class="col-2 column-break-word">
+                            @item.Partner.Name
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="col-2 column-break-word">
+                            @item.Address
+                        </td>
+                    }
                     <td class="col-3 column-break-word">
                         @item.Status.Name
                     </td>

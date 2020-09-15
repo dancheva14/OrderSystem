@@ -35,6 +35,7 @@
                 <div>
                     <input class="col-12" type="submit" value=Запази />
                 </div>
+                @Html.ActionLink("Изтрии", "DeleteBrandDetail", "AdminEditManagment", new { id = Model.BrandDetailId }, null)
             </div>
         </div>
     </fieldset>

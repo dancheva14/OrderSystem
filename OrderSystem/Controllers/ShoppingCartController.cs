@@ -37,7 +37,7 @@ namespace OrderSystem.Controllers
             order.OrderDetails = new List<OrderDetail>();
 
             if (User.Identity.Name == null)
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "NotFound");
             else
             {
                 var ids = HttpContext.Session.GetString("itemsToCart");

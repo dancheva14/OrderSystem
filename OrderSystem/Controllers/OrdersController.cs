@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OrderSystem.Database.Models;
 using OrderSystem.Services.Interfaces;
@@ -21,7 +22,7 @@ namespace OrderSystem.Controllers
         public IActionResult OrdersList(int orderId)
         {
             if (User.Identity.Name == null)
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "NotFound");
             else
             {
                 if (orderId == 0)
@@ -29,7 +30,7 @@ namespace OrderSystem.Controllers
                     var orders = ordersService.GetOrders().Where(o => o.User.UserName == User.Identity.Name);
                     return View(orders);
                 }
-                else if(orderId == -1)
+                else if (orderId == -1)
                 {
                     return View(new List<Order>());
                 }

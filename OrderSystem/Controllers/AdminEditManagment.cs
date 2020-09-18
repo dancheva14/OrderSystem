@@ -37,7 +37,7 @@ namespace OrderSystem.Controllers
         public IActionResult GetListCategory()
         {
             if (User.Identity.Name == null)
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "NotFound");
             else
                 return View(categoryService.GetCategorys());
         }
@@ -46,7 +46,7 @@ namespace OrderSystem.Controllers
         public IActionResult EditCategory(int id = 0)
         {
             if (User.Identity.Name == null)
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "NotFound");
             else
                 return View(categoryService.GetCategory(id));
         }
@@ -72,7 +72,7 @@ namespace OrderSystem.Controllers
         public IActionResult GetListPartner()
         {
             if (User.Identity.Name == null)
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "NotFound");
             else
                 return View(partnerService.GetPartners());
         }
@@ -81,7 +81,7 @@ namespace OrderSystem.Controllers
         public IActionResult EditPartner(int id = 0)
         {
             if (User.Identity.Name == null)
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "NotFound");
             else
                 return View(partnerService.GetPartner(id));
         }
@@ -106,7 +106,7 @@ namespace OrderSystem.Controllers
         public IActionResult GetListBrandDetail()
         {
             if (User.Identity.Name == null)
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "NotFound");
             else
                 return View(brandService.GetAllBrandDetails());
         }
@@ -115,7 +115,7 @@ namespace OrderSystem.Controllers
         public IActionResult EditBrandDetail(int id = 0)
         {
             if (User.Identity.Name == null)
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "NotFound");
             else
                 return View(brandService.GetBrandDetail(id));
         }
@@ -156,7 +156,7 @@ namespace OrderSystem.Controllers
         public IActionResult EditBrand(int id = 0)
         {
             if (User.Identity.Name == null)
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "NotFound");
             else
                 return View(brandService.GetBrand(id));
         }
@@ -165,7 +165,7 @@ namespace OrderSystem.Controllers
         public IActionResult GetListBrands()
         {
             if (User.Identity.Name == null)
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "NotFound");
             else
                 return View(brandService.GetBrands());
         }
@@ -191,7 +191,7 @@ namespace OrderSystem.Controllers
         public IActionResult GetListStatus()
         {
             if (User.Identity.Name == null)
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "NotFound");
             else
                 return View(statusService.GetStatuss());
         }
@@ -200,7 +200,7 @@ namespace OrderSystem.Controllers
         public IActionResult EditStatus(int id = 0)
         {
             if (User.Identity.Name == null)
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "NotFound");
             else
                 return View(statusService.GetStatus(id));
         }
@@ -225,7 +225,7 @@ namespace OrderSystem.Controllers
         public IActionResult GetListPart()
         {
             if (User.Identity.Name == null)
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "NotFound");
             else
                 return View(partService.GetParts());
         }
@@ -234,7 +234,7 @@ namespace OrderSystem.Controllers
         public IActionResult EditPart(int id = 0)
         {
             if (User.Identity.Name == null)
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "NotFound");
             else
                 return View(partService.GetPart(id));
         }
@@ -260,7 +260,7 @@ namespace OrderSystem.Controllers
         public IActionResult GetListUser()
         {
             if (User.Identity.Name == null)
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "NotFound");
             else
                 return View(userService.GetUsers());
         }
@@ -269,7 +269,7 @@ namespace OrderSystem.Controllers
         public IActionResult EditUser(string id)
         {
             if (User.Identity.Name == null)
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "NotFound");
             else
             {
                 var user = userService.GetUsers().FirstOrDefault(u => u.Id == id);

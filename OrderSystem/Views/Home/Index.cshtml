@@ -6,7 +6,16 @@
 <h3>Уеб приложение за управление на поръчки в автосервиз</h3>
 <div class="jumbotron">
     <p class="lead"></p>
-    <p><a href="~/Search/Index" class="btn btn-primary btn-lg">Научи повече &raquo;</a></p>
+    <p>
+        @if (User != null && User.Identity.IsAuthenticated)
+        {
+            <a href="~/Search/Index" class="btn btn-primary btn-lg">Научи повече &raquo;</a>
+        }
+        else
+        {
+    <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Научи повече &raquo;</a>
+        }
+    </p>
 </div>
 
 <div class="row">
@@ -15,12 +24,30 @@
         <p>
             Искаш да създадеш нова поръчка? Тук можеш да го направиш бързо и лесно.
         </p>
-        <p><a class="btn btn-default" href="~/Courses/Index">Научи повече &raquo;</a></p>
+        <p>
+            @if (User != null && User.Identity.IsAuthenticated)
+            {
+                <a class="btn btn-default" href="~/Courses/Index">Научи повече &raquo;</a>
+            }
+            else
+            {
+                <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Научи повече &raquo;</a>
+            }
+        </p>
     </div>
     <div class="col-md-6">
         <h3>Съществуваща поръчка</h3>
         <p>Искаш да проследиш своята поръчка? Тук можеш да го направиш бързо и лесно.</p>
-        <p><a class="btn btn-default" href="~/Lecture/Index">Научи повече &raquo;</a></p>
+        <p>
+            @if (User != null && User.Identity.IsAuthenticated)
+            {
+                <a class="btn btn-default" href="~/Lecture/Index">Научи повече &raquo;</a>
+            }
+            else
+            {
+                <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Научи повече &raquo;</a>
+            }
+        </p>
     </div>
     @*<div class="col-md-4">
             <h2>Web Hosting</h2>

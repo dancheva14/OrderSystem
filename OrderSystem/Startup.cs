@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using OrderSystem.Services;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace OrderSystem
 {
@@ -48,7 +49,7 @@ namespace OrderSystem
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
-            
+
             RegisterServices(services);
         }
 
@@ -92,7 +93,7 @@ namespace OrderSystem
             });
 
 
-            IdentityDataInitializer.SeedData(userManager, roleManager, roleDbService,userDatabaseService,partnersDatabase,brandsDatabaseService,categoryDatabaseService,statusDatabaseService).Wait();
+            IdentityDataInitializer.SeedData(userManager, roleManager, roleDbService, userDatabaseService, partnersDatabase, brandsDatabaseService, categoryDatabaseService, statusDatabaseService).Wait();
         }
 
         private void RegisterServices(IServiceCollection services)

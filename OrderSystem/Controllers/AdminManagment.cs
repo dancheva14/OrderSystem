@@ -30,7 +30,7 @@ namespace OrderSystem.Controllers
         public IActionResult AddCategory()
         {
             if (User.Identity.Name == null)
-                return RedirectToAction("Login", "User");
+                return RedirectToPage("Login");
             else
                 return View();
         }
@@ -68,7 +68,7 @@ namespace OrderSystem.Controllers
         public IActionResult AddBrandDetail()
         {
             if (User.Identity.Name == null)
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "NotFound");
             else
                 return View();
         }
@@ -141,7 +141,7 @@ namespace OrderSystem.Controllers
         public IActionResult AddPart()
         {
             if (User.Identity.Name == null)
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "NotFound");
             else
                 return View();
         }

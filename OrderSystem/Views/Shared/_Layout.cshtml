@@ -23,13 +23,35 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="FindOrder">Проследи пратка</a>
+                            @if (User != null && User.Identity.IsAuthenticated)
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="FindOrder">Проследи пратка</a>
+                            }
+                            else
+                            {
+                        <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Проследи пратка</a>
+                            }
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Parts" asp-action="PartsList">Артикули</a>
+                            @if (User != null && User.Identity.IsAuthenticated)
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Parts" asp-action="PartsList">Артикули</a>
+                            }
+                            else
+                            {
+                        <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Артикули</a>
+                            }
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="OrdersList">Поръчки</a>
+
+                            @if (User != null && User.Identity.IsAuthenticated)
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="OrdersList">Поръчки</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Поръчки</a>
+                            }
                         </li>
 
                         <li class="nav-item dropdown">

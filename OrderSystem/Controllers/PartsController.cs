@@ -20,7 +20,7 @@ namespace OrderSystem.Controllers
         public IActionResult PartsList()
         {
             if (User.Identity.Name == null)
-                return RedirectToAction("Login", "User");
+                return RedirectToPage("/Identity/Account/Login");
             else
             {
                 var parts = partsService.GetParts();

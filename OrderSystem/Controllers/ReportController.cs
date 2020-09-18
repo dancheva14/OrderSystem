@@ -23,7 +23,7 @@ namespace OrderSystem.Controllers
         public IActionResult UsersReport(string userId)
         {
             if (User.Identity.Name == null)
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "NotFound");
             else
             {
                 UserReportViewModel viewModel = new UserReportViewModel();
@@ -56,7 +56,7 @@ namespace OrderSystem.Controllers
         public IActionResult DateReport(DateTime fromDate, DateTime toDate)
         {
             if (User.Identity.Name == null)
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "NotFound");
             else
             {
                 DateReportViewModel viewModel = new DateReportViewModel();
@@ -87,7 +87,7 @@ namespace OrderSystem.Controllers
         public IActionResult StatusReport(int statusId)
         {
             if (User.Identity.Name == null)
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "NotFound");
             else
             {
                 StatusReportViewModel viewModel = new StatusReportViewModel();
@@ -121,7 +121,7 @@ namespace OrderSystem.Controllers
         public IActionResult PartnersReport(int partnerId)
         {
             if (User.Identity.Name == null)
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "NotFound");
             else
             {
                 PartnerReportViewModel viewModel = new PartnerReportViewModel();
